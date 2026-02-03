@@ -341,37 +341,37 @@
                     <tr>
                         <th>Mes</th>
                         <th>Consumo Total (kWh)</th>
+                        <th>Consumo Red (kWh)</th>
                         <th>Generación FV (kWh)</th>
-                        <th>Consumo Resto (kWh)</th>
-                        <th>Consumo Punta (kWh)</th>
-                        <th>Consumo Valle (kWh)</th>
+                        <th>% Generación FV</th>
+                        <th>% Consumo Red</th>
                     </tr>
                 </thead>
                 <tbody id="dataTableBody">
                     
                     <tr>
                         <td class="month-col">Oct</td>
+                        <td>37,627</td>
                         <td>27,401</td>
                         <td>10,226</td>
-                        <td>13,231</td>
-                        <td>7,072</td>
-                        <td>7,098</td>
+                        <td>27.2%</td>
+                        <td>72.8%</td>
                     </tr>
                     <tr>
                         <td class="month-col">Nov</td>
+                        <td>47,609</td>
                         <td>35,146</td>
                         <td>12,463</td>
-                        <td>16,836</td>
-                        <td>9,214</td>
-                        <td>9,096</td>
+                        <td>26.2%</td>
+                        <td>73.8%</td>
                     </tr>
                     <tr>
                         <td class="month-col">Dic</td>
+                        <td>59,770</td>
                         <td>46,318</td>
                         <td>13,452</td>
-                        <td>23,105</td>
-                        <td>11,250</td>
-                        <td>11,963</td>
+                        <td>22.5%</td>
+                        <td>77.5%</td>
                     </tr>
                 </tbody>
             </table>
@@ -436,47 +436,40 @@
                 labels: data3m.labels,
                 datasets: [
                     {
-                        label: 'Consumo hs resto',
+                        label: 'Consumo Red - hs resto',
                         data: data3m.resto,
                         backgroundColor: '#D32F2F',
                         borderWidth: 0,
-                        stack: 'consumo',
-                        order: 2,
-                        borderRadius: 4
+                        stack: 'stack0',
+                        order: 3,
+                        borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 }
                     },
                     {
-                        label: 'Consumo hs punta',
+                        label: 'Consumo Red - hs punta',
                         data: data3m.punta,
                         backgroundColor: '#FF9800',
                         borderWidth: 0,
-                        stack: 'consumo',
-                        order: 2,
-                        borderRadius: 4
+                        stack: 'stack0',
+                        order: 3,
+                        borderRadius: 0
                     },
                     {
-                        label: 'Consumo hs valle',
+                        label: 'Consumo Red - hs valle',
                         data: data3m.valle,
                         backgroundColor: '#757575',
                         borderWidth: 0,
-                        stack: 'consumo',
-                        order: 2,
-                        borderRadius: 4
+                        stack: 'stack0',
+                        order: 3,
+                        borderRadius: 0
                     },
                     {
-                        label: 'Generación FV',
-                        type: 'line',
+                        label: 'Generación FV (Autoconsumida)',
                         data: data3m.generacion,
-                        borderColor: '#000000',
-                        backgroundColor: 'rgba(0,0,0,0)',
-                        borderWidth: 3,
-                        fill: false,
-                        pointRadius: 5,
-                        pointBackgroundColor: '#000000',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointHoverRadius: 7,
-                        tension: 0.3,
-                        order: 1
+                        backgroundColor: '#4CAF50',
+                        borderWidth: 0,
+                        stack: 'stack0',
+                        order: 2,
+                        borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }
                     },
                     {
                         label: 'Consumo Total Real',
@@ -494,7 +487,7 @@
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2,
                         tension: 0.3,
-                        order: 0
+                        order: 1
                     }
                 ]
             },
@@ -529,11 +522,39 @@
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
+                                let value = context.parsed.y;
+                                
+                                // Calcular total para este mes
+                                let idx = context.dataIndex;
+                                const currentData = context.chart.data.datasets[0].data === data3m.resto ? data3m : data12m;
+                                let total = currentData.resto[idx] + currentData.punta[idx] + 
+                                           currentData.valle[idx] + currentData.generacion[idx];
+                                
+                                // Calcular porcentaje solo para barras (no para la línea de total)
+                                if (context.dataset.type !== 'line') {
+                                    let percentage = ((value / total) * 100).toFixed(1);
+                                    return label + ': ' + value.toLocaleString('es-AR') + ' kWh (' + percentage + '%)';
+                                } else {
+                                    return label + ': ' + value.toLocaleString('es-AR') + ' kWh';
                                 }
-                                label += context.parsed.y.toLocaleString('es-AR') + ' kWh';
-                                return label;
+                            },
+                            afterLabel: function(context) {
+                                // Mostrar resumen en el último dataset
+                                if (context.datasetIndex === 4) {
+                                    let idx = context.dataIndex;
+                                    const currentData = context.chart.data.datasets[0].data === data3m.resto ? data3m : data12m;
+                                    let consumoRed = currentData.resto[idx] + currentData.punta[idx] + currentData.valle[idx];
+                                    let genFV = currentData.generacion[idx];
+                                    let total = consumoRed + genFV;
+                                    let percRed = ((consumoRed / total) * 100).toFixed(1);
+                                    let percFV = ((genFV / total) * 100).toFixed(1);
+                                    return [
+                                        '---',
+                                        'Consumo Red: ' + percRed + '%',
+                                        'Generación FV: ' + percFV + '%'
+                                    ];
+                                }
+                                return '';
                             }
                         }
                     }
