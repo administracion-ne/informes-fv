@@ -628,15 +628,19 @@
             const tableBody = document.getElementById('dataTableBody');
             tableBody.innerHTML = '';
             for (let i = 0; i < data.labels.length; i++) {
-                const consumoTotal = data.resto[i] + data.punta[i] + data.valle[i];
+                const consumoRed = data.resto[i] + data.punta[i] + data.valle[i];
+                const genFV = data.generacion[i];
+                const consumoTotal = consumoRed + genFV;
+                const percFV = consumoTotal > 0 ? ((genFV / consumoTotal) * 100).toFixed(1) : 0;
+                const percRed = consumoTotal > 0 ? ((consumoRed / consumoTotal) * 100).toFixed(1) : 0;
                 const row = `
                     <tr>
                         <td class="month-col">${data.labels[i]}</td>
                         <td>${Math.round(consumoTotal).toLocaleString()}</td>
-                        <td>${Math.round(data.generacion[i]).toLocaleString()}</td>
-                        <td>${Math.round(data.resto[i]).toLocaleString()}</td>
-                        <td>${Math.round(data.punta[i]).toLocaleString()}</td>
-                        <td>${Math.round(data.valle[i]).toLocaleString()}</td>
+                        <td>${Math.round(consumoRed).toLocaleString()}</td>
+                        <td>${Math.round(genFV).toLocaleString()}</td>
+                        <td>${percFV}%</td>
+                        <td>${percRed}%</td>
                     </tr>
                 `;
                 tableBody.innerHTML += row;
