@@ -477,6 +477,24 @@
                         pointHoverRadius: 7,
                         tension: 0.3,
                         order: 1
+                    },
+                    {
+                        label: 'Consumo Total Real',
+                        type: 'line',
+                        data: data3m.labels.map((_, idx) => 
+                            data3m.resto[idx] + data3m.punta[idx] + data3m.valle[idx] + data3m.generacion[idx]
+                        ),
+                        borderColor: '#2c3e50',
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderWidth: 3,
+                        borderDash: [10, 5],
+                        fill: false,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#2c3e50',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        tension: 0.3,
+                        order: 0
                     }
                 ]
             },
@@ -579,6 +597,10 @@
             chartBarras.data.datasets[1].data = data.punta;
             chartBarras.data.datasets[2].data = data.valle;
             chartBarras.data.datasets[3].data = data.generacion;
+            // Recalcular consumo total real
+            chartBarras.data.datasets[4].data = data.labels.map((_, idx) => 
+                data.resto[idx] + data.punta[idx] + data.valle[idx] + data.generacion[idx]
+            );
             chartBarras.update();
             
             // Actualizar tabla de datos
