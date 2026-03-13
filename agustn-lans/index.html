@@ -297,6 +297,50 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* NUEVOS ESTILOS: BENCHMARK Y BANNER CROSS-SELLING */
+        .bench-card {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: 14px;
+            color: #333;
+        }
+        .bench-good { border-left: 5px solid #4CAF50; }
+        .bench-warn { border-left: 5px solid #FF9800; }
+        .bench-neutral { border-left: 5px solid #2196F3; }
+        
+        .promo-banner {
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .promo-banner.invierno {
+            background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+        }
+        .promo-banner.verano {
+            background: linear-gradient(135deg, #FF8F00 0%, #FF6F00 100%);
+        }
+        .promo-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .promo-text {
+            font-size: 14px;
+            opacity: 0.95;
+            line-height: 1.5;
+            max-width: 80%;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -308,6 +352,11 @@
             </div>
             <h1 id="headerTitle">INFORME FV ÃšLTIMOS 3 MESES</h1>
             <div class="nis">NIS: 5238577 | Cliente: Agustín Lanús | CategorÃ­a: T2-Ba</div>
+        </div>
+        
+        <!-- SECCION BENCHMARK -->
+        <div class="bench-card bench-good">
+            🏆 Tu consumo total bajó un <strong>3.6%</strong> respecto al mes pasado. ¡Excelente!
         </div>
         
         <div class="main-layout">
@@ -395,6 +444,12 @@
                 <div class="metric-label-large">Ahorro acumulado en $</div>
                 <div class="metric-value-large">$1,461,905</div>
             </div>
+        </div>
+        
+        <!-- BANNER DE CROSS-SELLING -->
+        <div class="promo-banner invierno">
+            <div class="promo-title">❄️ ¿Preparado para el frío?</div>
+            <div class="promo-text">¡Ahorra en tu calefacción! Convierte tu Piso Radiante en inteligente con nuestros Termostatos WiFi sin obras. Responde a nuestros emails para pedir cotización.</div>
         </div>
         
         <div class="footer">

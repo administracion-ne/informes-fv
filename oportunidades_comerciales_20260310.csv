@@ -1,0 +1,4 @@
+Prioridad,Tipo,Cliente,NIS,Motivo
+URGENTE,Anomalía Técnica,Martin Lecuona ,5076526,Producción solar cayó un 100% vs el mes pasado.
+MEDIA,Ampliación Solar,Joaquín Elizalde,5253775,Sistema chico. Genera 138kWh pero consume en total 680kWh.
+MEDIA,Cross-sell: Calefacción/ACS,Joaquín Elizalde,5253775,Alto consumo de red en invierno (542kWh).
