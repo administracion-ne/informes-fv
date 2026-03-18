@@ -1,0 +1,28 @@
+Prioridad,Tipo,Cliente,NIS,Motivo
+URGENTE,Anomalía Técnica,Fabrica Forja,5296128,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Distribuidora maestro,5263215,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Cendis,5238545,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Agustín Sanz Navamuel,3025373,Producción solar cayó un 57% vs el mes pasado.
+URGENTE,Anomalía Técnica,O.Domingo-Arenosa,5346222,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,O.Domingo-Colectivo,5211887,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Joaquín Elizalde,5253775,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,O.Domingo-Animana,4000681,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Farmacia San Francisco,3092029,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Imac-RdelaF,5352763,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Imac-RdL,5320074,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Ivan BV,5253773,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Agustín Lanús,5238577,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Linea C,5272486,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Etchart,5019237,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Facundo Alvarado,5068576,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,La Carolina,5214767,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Punto Corp,5346470,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Tambo Martorell,5213946,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Cartoon Inversor 1,5251104,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Cartoon Inversor 2,5251101,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Robles,3011513,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Tolaba,3062898,Producción solar cayó un 100% vs el mes pasado.
+URGENTE,Anomalía Técnica,Diagnostico Salta,4000202,Producción solar cayó un 100% vs el mes pasado.
+MEDIA,Cross-sell: Calefacción/ACS,Nallim Jose Carlos,5347980,Alto consumo de red en invierno (602kWh).
+MEDIA,Cross-sell: Calefacción/ACS,O.Domingo-Arenosa,5346222,Alto consumo de red en invierno (753kWh).
+MEDIA,Cross-sell: Calefacción/ACS,O.Domingo-Colectivo,5211887,Alto consumo de red en invierno (791kWh).

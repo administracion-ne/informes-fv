@@ -1072,7 +1072,7 @@
         <div class="bench-card bench-good">
 
 
-            🏆 Tu consumo total bajó un <strong>89.2%</strong> respecto al mes pasado. ¡Excelente!
+            🏆 Tu consumo total bajó un <strong>38.8%</strong> respecto al mes pasado. ¡Excelente!
 
 
         </div>
@@ -1201,6 +1201,30 @@
                     <tr>
 
 
+                        <td class="month-col">Oct</td>
+
+
+                        <td>9,030</td>
+
+
+                        <td>6,096</td>
+
+
+                        <td>2,934</td>
+
+
+                        <td>32.5%</td>
+
+
+                        <td>67.5%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
                         <td class="month-col">Nov</td>
 
 
@@ -1246,30 +1270,6 @@
                     </tr>
 
 
-                    <tr>
-
-
-                        <td class="month-col">Feb</td>
-
-
-                        <td>753</td>
-
-
-                        <td>753</td>
-
-
-                        <td>0</td>
-
-
-                        <td>0.0%</td>
-
-
-                        <td>100.0%</td>
-
-
-                    </tr>
-
-
                 </tbody>
 
 
@@ -1306,7 +1306,7 @@
                 <div class="metric-label-large">Consumo total acum. [kWh]</div>
 
 
-                <div class="metric-value-large">88,149</div>
+                <div class="metric-value-large">87,396</div>
 
 
             </div>
@@ -1406,709 +1406,245 @@
 
 
         const data3m = {
-
-
-            labels: ["Nov", "Dic", "Feb"],
-
-
-            resto: [2865.0, 2281.0, 744.0],
-
-
-            punta: [2248.0, 998.0, 3.0],
-
-
-            valle: [2776.0, 554.0, 6.0],
-
-
-            generacion: [3476.0, 3122.4, 0.0]
-
-
+            labels: ["Oct", "Nov", "Dic"],
+            resto: [2132.0, 2865.0, 2281.0],
+            punta: [1853.0, 2248.0, 998.0],
+            valle: [2111.0, 2776.0, 554.0],
+            generacion: [2934.2, 3476.0, 3122.4]
         };
-
-
+        data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
+        data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
-
-
         const data12m = {
-
-
-            labels: ["Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Feb"],
-
-
-            resto: [612.0, 1133.0, 1351.0, 1112.0, 670.0, 754.0, 994.0, 1397.0, 2132.0, 2865.0, 2281.0, 744.0],
-
-
-            punta: [2.0, 2.0, 16.0, 3.0, 3.0, 303.0, 56.0, 363.0, 1853.0, 2248.0, 998.0, 3.0],
-
-
-            valle: [3.0, 3.0, 4.0, 3.0, 4.0, 38.0, 6.0, 7.0, 2111.0, 2776.0, 554.0, 6.0],
-
-
-            generacion: [892.9, 1177.6, 3368.5, 3302.2, 3049.2, 2299.9, 3500.9, 3747.6, 2934.2, 3476.0, 3122.4, 0.0]
-
-
+            labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            resto: [258.0, 612.0, 1133.0, 1351.0, 1112.0, 670.0, 754.0, 994.0, 1397.0, 2132.0, 2865.0, 2281.0],
+            punta: [2.0, 2.0, 2.0, 16.0, 3.0, 3.0, 303.0, 56.0, 363.0, 1853.0, 2248.0, 998.0],
+            valle: [3.0, 3.0, 3.0, 4.0, 3.0, 4.0, 38.0, 6.0, 7.0, 2111.0, 2776.0, 554.0],
+            generacion: [309.5, 892.9, 1177.6, 3368.5, 3302.2, 3049.2, 2299.9, 3500.9, 3747.6, 2934.2, 3476.0, 3122.4]
         };
-
-
+        data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
+        data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
         
-
-
-        // Gráfico 1: Barras Apiladas + Línea
-
-
+        // Gráfico 1: Barras Apiladas
         const ctxBarras = document.getElementById('chartBarras').getContext('2d');
-
-
         const chartBarras = new Chart(ctxBarras, {
-
-
             type: 'bar',
-
-
             data: {
-
-
                 labels: data3m.labels,
-
-
                 datasets: [
-
-
+                    // BARRA 1: ORIGEN
                     {
-
-
-                        label: 'Consumo Red - hs resto',
-
-
-                        data: data3m.resto,
-
-
-                        backgroundColor: '#D32F2F',
-
-
+                        label: 'Consumo Red Total',
+                        data: data3m.red_total,
+                        backgroundColor: '#75787B', // Engineering Grey
+                        stack: 'Origen',
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.9,
                         borderWidth: 0,
-
-
-                        stack: 'stack0',
-
-
-                        order: 3,
-
-
-                        borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 }
-
-
-                    },
-
-
-                    {
-
-
-                        label: 'Consumo Red - hs punta',
-
-
-                        data: data3m.punta,
-
-
-                        backgroundColor: '#FF9800',
-
-
-                        borderWidth: 0,
-
-
-                        stack: 'stack0',
-
-
-                        order: 3,
-
-
                         borderRadius: 0
-
-
                     },
-
-
                     {
-
-
-                        label: 'Consumo Red - hs valle',
-
-
-                        data: data3m.valle,
-
-
-                        backgroundColor: '#757575',
-
-
-                        borderWidth: 0,
-
-
-                        stack: 'stack0',
-
-
-                        order: 3,
-
-
-                        borderRadius: 0
-
-
-                    },
-
-
-                    {
-
-
                         label: 'Generación FV (Autoconsumida)',
-
-
                         data: data3m.generacion,
-
-
-                        backgroundColor: '#4CAF50',
-
-
+                        backgroundColor: '#66BB6A', // Verde FV
+                        stack: 'Origen',
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.9,
                         borderWidth: 0,
-
-
-                        stack: 'stack0',
-
-
-                        order: 2,
-
-
                         borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }
-
-
                     },
-
-
+                    // BARRA 2: FRANJA HORARIA
                     {
-
-
-                        label: 'Consumo Total Real',
-
-
-                        type: 'line',
-
-
-                        data: data3m.labels.map((_, idx) => 
-
-
-                            data3m.resto[idx] + data3m.punta[idx] + data3m.valle[idx] + data3m.generacion[idx]
-
-
-                        ),
-
-
-                        borderColor: '#2c3e50',
-
-
-                        backgroundColor: 'rgba(0,0,0,0)',
-
-
-                        borderWidth: 3,
-
-
-                        borderDash: [10, 5],
-
-
-                        fill: false,
-
-
-                        pointRadius: 6,
-
-
-                        pointBackgroundColor: '#2c3e50',
-
-
-                        pointBorderColor: '#fff',
-
-
-                        pointBorderWidth: 2,
-
-
-                        tension: 0.3,
-
-
-                        order: 1
-
-
+                        label: 'Hs Valle',
+                        data: data3m.valle,
+                        backgroundColor: '#333333', // Titanium Black
+                        stack: 'Franja',
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.9,
+                        borderWidth: 0,
+                        borderRadius: 0
+                    },
+                    {
+                        label: 'Hs Pico',
+                        data: data3m.punta,
+                        backgroundColor: '#D13438', // Thermal Red
+                        stack: 'Franja',
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.9,
+                        borderWidth: 0,
+                        borderRadius: 0
+                    },
+                    {
+                        label: 'Hs Resto Total',
+                        data: data3m.resto_total,
+                        backgroundColor: '#FFC000', // Solar Yellow
+                        stack: 'Franja',
+                        categoryPercentage: 0.8,
+                        barPercentage: 0.9,
+                        borderWidth: 0,
+                        borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }
                     }
-
-
                 ]
-
-
             },
-
-
             options: {
-
-
                 responsive: true,
-
-
                 maintainAspectRatio: false,
-
-
                 interaction: {
-
-
                     mode: 'index',
-
-
                     intersect: false
-
-
                 },
-
-
                 plugins: {
-
-
                     legend: {
-
-
                         display: true,
-
-
                         position: 'top',
-
-
                         align: 'start',
-
-
                         labels: {
-
-
                             font: { size: 11, weight: '500' },
-
-
                             usePointStyle: true,
-
-
                             pointStyle: 'circle',
-
-
                             padding: 15,
-
-
                             color: '#333'
-
-
                         }
-
-
                     },
-
-
                     tooltip: {
-
-
                         backgroundColor: 'rgba(0, 0, 0, 0.8)',
-
-
                         padding: 12,
-
-
                         titleFont: { size: 13, weight: 'bold' },
-
-
                         bodyFont: { size: 12 },
-
-
                         borderColor: 'rgba(255,255,255,0.3)',
-
-
                         borderWidth: 1,
-
-
                         displayColors: true,
-
-
                         callbacks: {
-
-
                             label: function(context) {
-
-
                                 let label = context.dataset.label || '';
-
-
                                 let value = context.parsed.y;
-
-
+                                let percentage = '';
                                 
-
-
-                                // Calcular total para este mes
-
-
-                                let idx = context.dataIndex;
-
-
-                                const currentData = context.chart.data.datasets[0].data === data3m.resto ? data3m : data12m;
-
-
-                                let total = currentData.resto[idx] + currentData.punta[idx] + 
-
-
-                                           currentData.valle[idx] + currentData.generacion[idx];
-
-
+                                let total = 0;
+                                context.chart.data.datasets.forEach(function(ds) {
+                                    if(ds.stack === 'Origen') {
+                                        total += ds.data[context.dataIndex];
+                                    }
+                                });
                                 
-
-
-                                // Calcular porcentaje solo para barras (no para la línea de total)
-
-
-                                if (context.dataset.type !== 'line') {
-
-
-                                    let percentage = ((value / total) * 100).toFixed(1);
-
-
-                                    return label + ': ' + value.toLocaleString('es-AR') + ' kWh (' + percentage + '%)';
-
-
-                                } else {
-
-
-                                    return label + ': ' + value.toLocaleString('es-AR') + ' kWh';
-
-
+                                if (total > 0) {
+                                    percentage = ((value / total) * 100).toFixed(1);
                                 }
-
-
+                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh (' + Math.round(percentage) + '%)';
                             },
-
-
                             afterLabel: function(context) {
-
-
-                                // Mostrar resumen en el último dataset
-
-
                                 if (context.datasetIndex === 4) {
-
-
-                                    let idx = context.dataIndex;
-
-
-                                    const currentData = context.chart.data.datasets[0].data === data3m.resto ? data3m : data12m;
-
-
-                                    let consumoRed = currentData.resto[idx] + currentData.punta[idx] + currentData.valle[idx];
-
-
-                                    let genFV = currentData.generacion[idx];
-
-
-                                    let total = consumoRed + genFV;
-
-
-                                    let percRed = ((consumoRed / total) * 100).toFixed(1);
-
-
-                                    let percFV = ((genFV / total) * 100).toFixed(1);
-
-
+                                    let total = 0;
+                                    let redTotal = 0;
+                                    let genTotal = 0;
+                                    context.chart.data.datasets.forEach(function(ds) {
+                                        if(ds.stack === 'Origen') {
+                                            total += ds.data[context.dataIndex];
+                                            if (ds.label.includes('Red')) redTotal = ds.data[context.dataIndex];
+                                            if (ds.label.includes('FV')) genTotal = ds.data[context.dataIndex];
+                                        }
+                                    });
+                                    let percRed = total > 0 ? ((redTotal / total) * 100).toFixed(1) : 0;
+                                    let percFV = total > 0 ? ((genTotal / total) * 100).toFixed(1) : 0;
                                     return [
-
-
                                         '---',
-
-
                                         'Consumo Red: ' + percRed + '%',
-
-
-                                        'Generación FV: ' + percFV + '%'
-
-
+                                        'Autoconsumo FV: ' + percFV + '%'
                                     ];
-
-
                                 }
-
-
                                 return '';
-
-
+                            },
+                            footer: function(tooltipItems) {
+                                let total = 0;
+                                tooltipItems.forEach(function(tooltipItem) {
+                                    if(tooltipItem.dataset.stack === 'Origen') {
+                                        total += tooltipItem.parsed.y;
+                                    }
+                                });
+                                return 'Consumo Total: ' + total.toLocaleString('es-AR') + ' kWh';
                             }
-
-
                         }
-
-
                     }
-
-
                 },
-
-
                 scales: {
-
-
                     x: {
-
-
                         stacked: true,
-
-
-                        grid: { 
-
-
-                            display: false
-
-
-                        },
-
-
+                        grid: { display: false },
                         ticks: {
-
-
                             font: { size: 12, weight: '600' },
-
-
                             color: '#000',
-
-
                             autoSkip: false,
-
-
                             maxRotation: 0,
-
-
                             minRotation: 0
-
-
                         }
-
-
                     },
-
-
                     y: {
-
-
                         stacked: true,
-
-
                         beginAtZero: true,
-
-
                         grid: {
-
-
                             color: 'rgba(0,0,0,0.05)',
-
-
                             drawBorder: false
-
-
                         },
-
-
                         ticks: {
-
-
                             font: { size: 11 },
-
-
                             color: '#555',
-
-
                             callback: function(value) {
-
-
                                 return value.toLocaleString('es-AR');
-
-
                             }
-
-
                         },
-
-
                         title: {
-
-
                             display: true,
-
-
                             text: 'kWh',
-
-
                             font: { size: 11, weight: 'bold' },
-
-
                             color: '#333'
-
-
                         }
-
-
                     }
-
-
                 }
-
-
             }
-
-
         });
-
-
         
-
-
         // Función para cambiar período
-
-
         function switchPeriod(period) {
-
-
             const data = period === '3m' ? data3m : data12m;
-
-
             const title = period === '3m' ? 'INFORME FV ÚLTIMOS 3 MESES' : 'INFORME FV ANUAL';
-
-
             
-
-
-            // Actualizar título
-
-
             document.getElementById('headerTitle').textContent = title;
-
-
             
-
-
-            // Actualizar botones
-
-
             document.querySelectorAll('.period-btn').forEach(btn => {
-
-
                 btn.classList.remove('active');
-
-
             });
-
-
             event.target.classList.add('active');
-
-
             
-
-
-            // Actualizar datos del gráfico
-
-
             chartBarras.data.labels = data.labels;
-
-
-            chartBarras.data.datasets[0].data = data.resto;
-
-
-            chartBarras.data.datasets[1].data = data.punta;
-
-
+            chartBarras.data.datasets[0].data = data.red_total;
+            chartBarras.data.datasets[1].data = data.generacion;
             chartBarras.data.datasets[2].data = data.valle;
-
-
-            chartBarras.data.datasets[3].data = data.generacion;
-
-
-            // Recalcular consumo total real
-
-
-            chartBarras.data.datasets[4].data = data.labels.map((_, idx) => 
-
-
-                data.resto[idx] + data.punta[idx] + data.valle[idx] + data.generacion[idx]
-
-
-            );
-
-
+            chartBarras.data.datasets[3].data = data.punta;
+            chartBarras.data.datasets[4].data = data.resto_total;
             chartBarras.update();
-
-
             
-
-
-            // Actualizar tabla de datos
-
-
             const tableBody = document.getElementById('dataTableBody');
-
-
             tableBody.innerHTML = '';
-
-
             for (let i = 0; i < data.labels.length; i++) {
-
-
-                const consumoRed = data.resto[i] + data.punta[i] + data.valle[i];
-
-
+                const consumoRed = data.red_total[i];
                 const genFV = data.generacion[i];
-
-
                 const consumoTotal = consumoRed + genFV;
-
-
                 const percFV = consumoTotal > 0 ? ((genFV / consumoTotal) * 100).toFixed(1) : 0;
-
-
                 const percRed = consumoTotal > 0 ? ((consumoRed / consumoTotal) * 100).toFixed(1) : 0;
-
-
+                
                 const row = `
-
-
                     <tr>
-
-
                         <td class="month-col">${data.labels[i]}</td>
-
-
-                        <td>${Math.round(consumoTotal).toLocaleString()}</td>
-
-
-                        <td>${Math.round(consumoRed).toLocaleString()}</td>
-
-
-                        <td>${Math.round(genFV).toLocaleString()}</td>
-
-
+                        <td>${Math.round(consumoTotal).toLocaleString('es-AR')}</td>
+                        <td>${Math.round(consumoRed).toLocaleString('es-AR')}</td>
+                        <td>${Math.round(genFV).toLocaleString('es-AR')}</td>
                         <td>${percFV}%</td>
-
-
                         <td>${percRed}%</td>
-
-
                     </tr>
-
-
                 `;
-
-
                 tableBody.innerHTML += row;
-
-
             }
-
-
         }
-
-
-        
-
 
         // Gráfico 2: Gauge COâ‚‚
 
