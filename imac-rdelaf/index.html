@@ -1491,8 +1491,8 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 interaction: {
-                    mode: 'index',
-                    intersect: false
+                    mode: 'nearest',
+                    intersect: true
                 },
                 plugins: {
                     legend: {
@@ -1519,50 +1519,20 @@
                             label: function(context) {
                                 let label = context.dataset.label || '';
                                 let value = context.parsed.y;
-                                let percentage = '';
-                                
-                                let total = 0;
-                                context.chart.data.datasets.forEach(function(ds) {
-                                    if(ds.stack === 'Origen') {
-                                        total += ds.data[context.dataIndex];
-                                    }
-                                });
-                                
-                                if (total > 0) {
-                                    percentage = ((value / total) * 100).toFixed(1);
-                                }
-                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh (' + Math.round(percentage) + '%)';
-                            },
-                            afterLabel: function(context) {
-                                if (context.datasetIndex === 4) {
-                                    let total = 0;
-                                    let redTotal = 0;
-                                    let genTotal = 0;
-                                    context.chart.data.datasets.forEach(function(ds) {
-                                        if(ds.stack === 'Origen') {
-                                            total += ds.data[context.dataIndex];
-                                            if (ds.label.includes('Red')) redTotal = ds.data[context.dataIndex];
-                                            if (ds.label.includes('FV')) genTotal = ds.data[context.dataIndex];
-                                        }
-                                    });
-                                    let percRed = total > 0 ? ((redTotal / total) * 100).toFixed(1) : 0;
-                                    let percFV = total > 0 ? ((genTotal / total) * 100).toFixed(1) : 0;
-                                    return [
-                                        '---',
-                                        'Consumo Red: ' + percRed + '%',
-                                        'Autoconsumo FV: ' + percFV + '%'
-                                    ];
-                                }
-                                return '';
+                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh';
                             },
                             footer: function(tooltipItems) {
+                                // Solo calcular total si hovered stack es Origen
+                                const stack = tooltipItems[0]?.dataset?.stack;
+                                if (stack !== 'Origen') return '';
                                 let total = 0;
-                                tooltipItems.forEach(function(tooltipItem) {
-                                    if(tooltipItem.dataset.stack === 'Origen') {
-                                        total += tooltipItem.parsed.y;
+                                const chart = tooltipItems[0].chart;
+                                chart.data.datasets.forEach(function(ds) {
+                                    if (ds.stack === 'Origen') {
+                                        total += ds.data[tooltipItems[0].dataIndex];
                                     }
                                 });
-                                return 'Consumo Total: ' + total.toLocaleString('es-AR') + ' kWh';
+                                return 'Total consumo: ' + total.toLocaleString('es-AR') + ' kWh';
                             }
                         }
                     }
