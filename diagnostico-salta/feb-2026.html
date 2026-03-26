@@ -764,10 +764,10 @@
         <!-- SECCION BENCHMARK -->
 
 
-        <div class="bench-card bench-warn">
+        <div class="bench-card bench-good">
 
 
-            📈 Tu consumo total subió un <strong>0.0%</strong> respecto al mes pasado.
+            🏆 Tu consumo total bajó un <strong>11.2%</strong> respecto al mes pasado. ¡Excelente!
 
 
         </div>
@@ -896,6 +896,30 @@
                     <tr>
 
 
+                        <td class="month-col">Dic</td>
+
+
+                        <td>20,612</td>
+
+
+                        <td>16,520</td>
+
+
+                        <td>4,092</td>
+
+
+                        <td>19.9%</td>
+
+
+                        <td>80.1%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
                         <td class="month-col">Ene</td>
 
 
@@ -912,30 +936,6 @@
 
 
                         <td>83.3%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">Feb</td>
-
-
-                        <td>18,876</td>
-
-
-                        <td>15,540</td>
-
-
-                        <td>3,336</td>
-
-
-                        <td>17.7%</td>
-
-
-                        <td>82.3%</td>
 
 
                     </tr>
@@ -1012,15 +1012,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">243.620</div>
+                <div class="metric-value-large">224.744</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">38.307</div>
+                <div class="metric-value-large">34.971</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$5.834.650</div>
+                <div class="metric-value-large">$5.311.446</div>
             </div>
         </div>
 
@@ -1055,21 +1055,21 @@
 
 
         const data3m = {
-            labels: ["Ene", "Feb", "Feb"],
-            resto: [9378.0, 8050.0, 8050.0],
-            punta: [4389.0, 3990.0, 3990.0],
-            valle: [3943.0, 3500.0, 3500.0],
-            generacion: [3551.4, 3335.7, 3335.7]
+            labels: ["Dic", "Ene", "Feb"],
+            resto: [8330.0, 9378.0, 8050.0],
+            punta: [4270.0, 4389.0, 3990.0],
+            valle: [3920.0, 3943.0, 3500.0],
+            generacion: [4092.3, 3551.4, 3335.7]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Feb"],
-            resto: [8610.0, 9240.0, 8330.0, 5955.0, 7980.0, 7560.0, 8680.0, 7770.0, 8330.0, 9378.0, 8050.0, 8050.0],
-            punta: [4060.0, 4060.0, 3500.0, 2319.0, 3990.0, 4060.0, 4200.0, 4130.0, 4270.0, 4389.0, 3990.0, 3990.0],
-            valle: [3570.0, 3570.0, 3150.0, 2649.0, 3360.0, 3500.0, 3640.0, 3780.0, 3920.0, 3943.0, 3500.0, 3500.0],
-            generacion: [2366.0, 2336.1, 1969.5, 2167.6, 2805.5, 3433.2, 3585.9, 3980.5, 4092.3, 3551.4, 3335.7, 3335.7]
+            labels: ["Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb"],
+            resto: [10430.0, 8610.0, 9240.0, 8330.0, 5955.0, 7980.0, 7560.0, 8680.0, 7770.0, 8330.0, 9378.0, 8050.0],
+            punta: [4200.0, 4060.0, 4060.0, 3500.0, 2319.0, 3990.0, 4060.0, 4200.0, 4130.0, 4270.0, 4389.0, 3990.0],
+            valle: [3710.0, 3570.0, 3570.0, 3150.0, 2649.0, 3360.0, 3500.0, 3640.0, 3780.0, 3920.0, 3943.0, 3500.0],
+            generacion: [1347.6, 2366.0, 2336.1, 1969.5, 2167.6, 2805.5, 3433.2, 3585.9, 3980.5, 4092.3, 3551.4, 3335.7]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
