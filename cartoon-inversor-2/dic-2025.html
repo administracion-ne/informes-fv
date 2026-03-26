@@ -1056,9 +1056,9 @@
 
         const data3m = {
             labels: ["Nov", "Dic", "Ene"],
-            resto: [1872.0, 3216.0, 16188.0],
-            punta: [108.0, 852.0, 0.0],
-            valle: [180.0, 324.0, 0.0],
+            resto: [1872.0, 3216.0, 13067.0],
+            punta: [108.0, 852.0, 1871.0],
+            valle: [180.0, 324.0, 1250.0],
             generacion: [4394.8, 3063.6, 0.0]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
@@ -1066,9 +1066,9 @@
         
         const data12m = {
             labels: ["Ago", "Sep", "Oct", "Nov", "Dic", "Ene"],
-            resto: [1968.0, 2964.0, 5059.0, 1872.0, 3216.0, 16188.0],
-            punta: [408.0, 336.0, 455.0, 108.0, 852.0, 0.0],
-            valle: [180.0, 168.0, 590.0, 180.0, 324.0, 0.0],
+            resto: [1968.0, 2964.0, 5059.0, 1872.0, 3216.0, 13067.0],
+            punta: [408.0, 336.0, 455.0, 108.0, 852.0, 1871.0],
+            valle: [180.0, 168.0, 590.0, 180.0, 324.0, 1250.0],
             generacion: [1438.9, 2999.4, 3283.3, 4394.8, 3063.6, 0.0]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
