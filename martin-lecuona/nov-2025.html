@@ -764,10 +764,10 @@
         <!-- SECCION BENCHMARK -->
 
 
-        <div class="bench-card bench-warn">
+        <div class="bench-card bench-good">
 
 
-            📈 Tu consumo total subió un <strong>104.8%</strong> respecto al mes pasado.
+            🏆 Tu consumo total bajó un <strong>45.5%</strong> respecto al mes pasado. ¡Excelente!
 
 
         </div>
@@ -896,6 +896,30 @@
                     <tr>
 
 
+                        <td class="month-col">Oct</td>
+
+
+                        <td>10,790</td>
+
+
+                        <td>8,130</td>
+
+
+                        <td>2,660</td>
+
+
+                        <td>24.7%</td>
+
+
+                        <td>75.3%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
                         <td class="month-col">Nov</td>
 
 
@@ -927,30 +951,6 @@
 
 
                         <td>4,410</td>
-
-
-                        <td>0</td>
-
-
-                        <td>0.0%</td>
-
-
-                        <td>100.0%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">Feb</td>
-
-
-                        <td>9,030</td>
-
-
-                        <td>9,030</td>
 
 
                         <td>0</td>
@@ -1012,7 +1012,7 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">48.256</div>
+                <div class="metric-value-large">39.226</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
@@ -1055,21 +1055,21 @@
 
 
         const data3m = {
-            labels: ["Nov", "Dic", "Feb"],
-            resto: [4020.0, 3810.0, 5910.0],
-            punta: [30.0, 30.0, 1620.0],
-            valle: [2130.0, 570.0, 1500.0],
-            generacion: [1905.7, 0.0, 0.0]
+            labels: ["Oct", "Nov", "Dic"],
+            resto: [5250.0, 4020.0, 3810.0],
+            punta: [30.0, 30.0, 30.0],
+            valle: [2850.0, 2130.0, 570.0],
+            generacion: [2660.3, 1905.7, 0.0]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Feb"],
-            resto: [3930.0, 60.0, 30.0, 30.0, 4770.0, 5250.0, 4020.0, 3810.0, 5910.0],
-            punta: [390.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 1620.0],
-            valle: [450.0, 30.0, 30.0, 30.0, 2340.0, 2850.0, 2130.0, 570.0, 1500.0],
-            generacion: [481.0, 612.2, 364.0, 392.7, 1880.8, 2660.3, 1905.7, 0.0, 0.0]
+            labels: ["May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            resto: [3930.0, 60.0, 30.0, 30.0, 4770.0, 5250.0, 4020.0, 3810.0],
+            punta: [390.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0],
+            valle: [450.0, 30.0, 30.0, 30.0, 2340.0, 2850.0, 2130.0, 570.0],
+            generacion: [481.0, 612.2, 364.0, 392.7, 1880.8, 2660.3, 1905.7, 0.0]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);

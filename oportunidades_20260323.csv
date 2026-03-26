@@ -1,0 +1,11 @@
+Prioridad,Tipo,Cliente,NIS,Motivo
+URGENTE,Anomalía Técnica,Distribuidora maestro,5263215,Producción solar cayó un 99% vs el mes pasado.
+URGENTE,Anomalía Técnica,O.Domingo-Arenosa,5346222,Producción solar cayó un 64% vs el mes pasado.
+URGENTE,Anomalía Técnica,Imac-RdL,5320074,Producción solar cayó un 46% vs el mes pasado.
+URGENTE,Anomalía Técnica,Agustín Lanús,5238577,Producción solar cayó un 58% vs el mes pasado.
+URGENTE,Anomalía Técnica,Facundo Alvarado,5068576,Producción solar cayó un 79% vs el mes pasado.
+URGENTE,Anomalía Técnica,La Carolina,5214767,Producción solar cayó un 65% vs el mes pasado.
+MEDIA,Cross-sell: Calefacción/ACS,Nallim Jose Carlos,5347980,Alto consumo de red en invierno (602kWh).
+MEDIA,Cross-sell: Calefacción/ACS,O.Domingo-Arenosa,5346222,Alto consumo de red en invierno (753kWh).
+MEDIA,Cross-sell: Calefacción/ACS,O.Domingo-Colectivo,5211887,Alto consumo de red en invierno (791kWh).
+MEDIA,Ampliación Solar,Joaquín Elizalde,5253775,Sistema chico. Genera 101kWh pero consume en total 473kWh.
