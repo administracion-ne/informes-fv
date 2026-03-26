@@ -767,7 +767,7 @@
         <div class="bench-card bench-good">
 
 
-            🏆 Tu consumo total bajó un <strong>26.2%</strong> respecto al mes pasado. ¡Excelente!
+            🏆 Tu consumo total bajó un <strong>22.5%</strong> respecto al mes pasado. ¡Excelente!
 
 
         </div>
@@ -804,11 +804,11 @@
                     <div class="battery-title">☀ Generación Solar</div>
                     <div class="battery-solo-wrap">
                         <div class="battery-body-lg">
-                            <div class="battery-fill-lg" style="height:27%"></div>
-                            <span class="battery-pct-lg">27%</span>
+                            <div class="battery-fill-lg" style="height:30%"></div>
+                            <span class="battery-pct-lg">30%</span>
                         </div>
                         <div class="battery-solo-info">
-                            <div class="battery-solo-val">27%</div>
+                            <div class="battery-solo-val">30%</div>
                             <div class="battery-solo-sub">del consumo<br>cubierto por FV</div>
                         </div>
                     </div>
@@ -816,7 +816,7 @@
 
                 <div class="eco-box">
                     <div class="eco-co2">
-                        <div class="eco-co2-val">47</div>
+                        <div class="eco-co2-val">55</div>
                         <div class="eco-co2-unit">kg CO₂e evitados</div>
                     </div>
                     <div class="eco-divider"></div>
@@ -947,19 +947,19 @@
                         <td class="month-col">Ene</td>
 
 
-                        <td>390</td>
+                        <td>409</td>
 
 
                         <td>285</td>
 
 
-                        <td>105</td>
+                        <td>124</td>
 
 
-                        <td>26.9%</td>
+                        <td>30.4%</td>
 
 
-                        <td>73.1%</td>
+                        <td>69.6%</td>
 
 
                     </tr>
@@ -996,11 +996,11 @@
         <div class="metrics-grid" id="metricsGrid3m">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo del mes [kWh]</div>
-                <div class="metric-value-large">389</div>
+                <div class="metric-value-large">409</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV del mes [kWh]</div>
-                <div class="metric-value-large">104</div>
+                <div class="metric-value-large">124</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro del mes en $</div>
@@ -1012,15 +1012,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">23.639</div>
+                <div class="metric-value-large">23.697</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">6.366</div>
+                <div class="metric-value-large">6.424</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$1.088.902</div>
+                <div class="metric-value-large">$1.093.636</div>
             </div>
         </div>
 
@@ -1059,7 +1059,7 @@
             resto: [270.0, 158.0, 137.0],
             punta: [173.0, 116.0, 99.0],
             valle: [74.0, 91.0, 49.0],
-            generacion: [253.6, 163.0, 104.9]
+            generacion: [253.6, 163.0, 124.2]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
@@ -1069,7 +1069,7 @@
             resto: [288.0, 404.0, 288.0, 348.0, 368.0, 292.0, 267.0, 274.0, 333.0, 270.0, 158.0, 137.0],
             punta: [214.0, 228.0, 214.0, 200.0, 240.0, 136.0, 214.0, 216.0, 199.0, 173.0, 116.0, 99.0],
             valle: [109.0, 98.0, 109.0, 84.0, 103.0, 86.0, 95.0, 100.0, 80.0, 74.0, 91.0, 49.0],
-            generacion: [359.1, 287.3, 227.7, 176.3, 174.2, 148.2, 205.3, 235.5, 290.0, 253.6, 163.0, 104.9]
+            generacion: [359.1, 287.3, 227.7, 176.3, 174.2, 148.2, 205.3, 235.5, 290.0, 253.6, 163.0, 124.2]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
@@ -1385,7 +1385,7 @@
                     
 
 
-                    const text = '47'.replace(/,/g, '.');
+                    const text = '55'.replace(/,/g, '.');
 
 
                     ctx.fillText(text, width / 2, height / 2 - 5);
