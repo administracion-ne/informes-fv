@@ -931,159 +931,6 @@
 
 <body>
 
-<!-- ══════════════════════════════════════════════════════════
-     MAGIC LINK AUTH — Nuevas Energías FV Reports
-     Token se valida con Web Crypto API (SHA-256), sin dependencias.
-════════════════════════════════════════════════════════════ -->
-
-<!-- Overlay de bloqueo (oculto si el token es válido) -->
-<div id="ne-auth-overlay" style="
-    position:fixed; inset:0; z-index:99999;
-    background:#f2f2f2;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Roboto',Arial,sans-serif;
-">
-  <div style="
-      background:#fff; border-radius:16px;
-      box-shadow:0 8px 40px rgba(0,0,0,0.12);
-      padding:48px 40px; max-width:400px; width:90%;
-      text-align:center; overflow:hidden; position:relative;
-  ">
-    <!-- Franja de colores arriba -->
-    <div style="position:absolute;top:0;left:0;right:0;height:5px;display:flex;">
-      <div style="flex:1;background:#D13438;"></div>
-      <div style="flex:1;background:#D13438;"></div>
-      <div style="flex:1;background:#FFC000;"></div>
-      <div style="flex:1;background:#75787B;"></div>
-    </div>
-
-    <!-- Logo -->
-    <div style="margin-bottom:24px;margin-top:8px;">
-      <span style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;color:#333;">NUEVAS <span style='color:#FFC000;'>ENERGÍAS</span></span>
-    </div>
-
-    <!-- Icono candado -->
-    <div id="ne-auth-lock-icon" style="
-        width:64px;height:64px;background:#FFF8E1;
-        border-radius:50%;display:flex;align-items:center;
-        justify-content:center;margin:0 auto 20px;
-        font-size:28px; cursor:pointer;
-    ">🔐</div>
-
-    <!-- Título -->
-    <h2 style="
-        font-family:'Oswald',sans-serif;font-size:20px;
-        font-weight:700;color:#333;text-transform:uppercase;
-        letter-spacing:0.5px;margin-bottom:12px;
-    ">Acceso Restringido</h2>
-
-    <!-- Mensaje -->
-    <p style="font-size:14px;color:#75787B;line-height:1.7;margin-bottom:28px;">
-      Este informe es privado.<br>
-      <strong style="color:#333;">Hacé clic en el botón de tu email</strong>
-      para acceder de forma segura.
-    </p>
-
-    <!-- Sub texto -->
-    <p style="font-size:11px;color:#bbb;">
-      Si recibiste el email de Nuevas Energías,<br>
-      el botón <em>"Ver mi informe"</em> te abrirá este reporte.
-    </p>
-
-    <!-- Franja de colores abajo -->
-    <div style="position:absolute;bottom:0;left:0;right:0;height:4px;display:flex;">
-      <div style="flex:1;background:#FFC000;"></div>
-      <div style="flex:1;background:#D13438;"></div>
-      <div style="flex:1;background:#75787B;"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Script de validación del token -->
-<script>
-(function() {
-  // Hash SHA-256 del token válido (generado en build-time por auth_utils.py)
-  var VALID_HASH = "cb91062ecce43cf40882136dbb70c7064fd64dee086988bbf0fcd85ff5800bb3";
-
-  // Clave para sessionStorage (evita re-validar en cada refresh)
-  var SESSION_KEY = "ne_fv_auth_" + VALID_HASH.substring(0, 8);
-
-  var overlay = document.getElementById("ne-auth-overlay");
-  var lockIcon = document.getElementById("ne-auth-lock-icon");
-
-  function showReport() {
-    if (overlay) overlay.style.display = "none";
-  }
-
-  function showLock() {
-    if (overlay) overlay.style.display = "flex";
-  }
-
-  // Bypass para el administrador local
-  if (lockIcon) {
-    lockIcon.addEventListener("dblclick", function() {
-      var pin = prompt("PIN de Administrador:");
-      if (pin === "nuevas2026") {
-        sessionStorage.setItem(SESSION_KEY, "ok");
-        showReport();
-      }
-    });
-  }
-
-  // Calcular SHA-256 del token con Web Crypto API
-  async function validateToken(token) {
-    try {
-      var encoder = new TextEncoder();
-      var data = encoder.encode(token);
-      var hashBuffer = await crypto.subtle.digest("SHA-256", data);
-      var hashHex = Array.from(new Uint8Array(hashBuffer))
-        .map(function(b) { return b.toString(16).padStart(2, "0"); })
-        .join("");
-      return hashHex === VALID_HASH;
-    } catch(e) {
-      return false;
-    }
-  }
-
-  async function init() {
-    // 0. Bypass automático si se abre localmente (doble clic al archivo descargado)
-    if (window.location.protocol === "file:") {
-      showReport();
-      return;
-    }
-
-    // 1. ¿Ya está autenticado en esta sesión?
-    if (sessionStorage.getItem(SESSION_KEY) === "ok") {
-      showReport();
-      return;
-    }
-
-    // 2. ¿Hay token en la URL?
-    var params = new URLSearchParams(window.location.search);
-    var token = params.get("token") || "";
-
-    if (!token) {
-      showLock();
-      return;
-    }
-
-    // 3. Validar token
-    var isValid = await validateToken(token);
-    if (isValid) {
-      sessionStorage.setItem(SESSION_KEY, "ok");
-      showReport();
-    } else {
-      showLock();
-    }
-  }
-
-  // Mostrar overlay inmediatamente mientras se valida (evita flash de contenido)
-  showLock();
-  init();
-})();
-</script>
-<!-- ══════════════════════════════════════════════════════════ -->
-
 
     <div class="container">
 
@@ -1114,10 +961,10 @@
         <!-- SECCION BENCHMARK -->
 
 
-        <div class="bench-card bench-good">
+        <div class="bench-card bench-warn">
 
 
-            🏆 Tu consumo total bajó un <strong>7.6%</strong> respecto al mes pasado. ¡Excelente!
+            📈 Tu consumo total subió un <strong>18.3%</strong> respecto al mes pasado.
 
 
         </div>
@@ -1246,30 +1093,6 @@
                     <tr>
 
 
-                        <td class="month-col">Dic</td>
-
-
-                        <td>1690</td>
-
-
-                        <td>1420</td>
-
-
-                        <td>270</td>
-
-
-                        <td>16%</td>
-
-
-                        <td>84%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
                         <td class="month-col">Ene</td>
 
 
@@ -1310,6 +1133,30 @@
 
 
                         <td>77.7%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td class="month-col">Mar</td>
+
+
+                        <td>2251.5</td>
+
+
+                        <td>1840</td>
+
+
+                        <td>411.5</td>
+
+
+                        <td>18.3%</td>
+
+
+                        <td>81.7%</td>
 
 
                     </tr>
@@ -1362,15 +1209,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">13260.4</div>
+                <div class="metric-value-large">15511.9</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">2709.4</div>
+                <div class="metric-value-large">3120.9</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$416238.62</div>
+                <div class="metric-value-large">$481481.04</div>
             </div>
         </div>
 
@@ -1401,21 +1248,21 @@
 
 
         const data3m = {
-            labels: ["Dic", "Ene", "Feb"],
-            resto: [949.0, 1158.0, 979.0],
-            punta: [170.0, 186.0, 196.0],
-            valle: [301.0, 315.0, 303.0],
-            generacion: [270.0, 400.4, 425.2]
+            labels: ["Ene", "Feb", "Mar"],
+            resto: [1158.0, 979.0, 1244.0],
+            punta: [186.0, 196.0, 231.0],
+            valle: [315.0, 303.0, 365.0],
+            generacion: [400.4, 425.2, 411.5]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb"],
-            resto: [979.0, 1098.0, 1118.0, 1031.0, 949.0, 1158.0, 979.0],
-            punta: [153.0, 168.0, 179.0, 162.0, 170.0, 186.0, 196.0],
-            valle: [262.0, 278.0, 298.0, 268.0, 301.0, 315.0, 303.0],
-            generacion: [748.2, 192.3, 335.5, 337.8, 270.0, 400.4, 425.2]
+            labels: ["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar"],
+            resto: [979.0, 1098.0, 1118.0, 1031.0, 949.0, 1158.0, 979.0, 1244.0],
+            punta: [153.0, 168.0, 179.0, 162.0, 170.0, 186.0, 196.0, 231.0],
+            valle: [262.0, 278.0, 298.0, 268.0, 301.0, 315.0, 303.0, 365.0],
+            generacion: [748.2, 192.3, 335.5, 337.8, 270.0, 400.4, 425.2, 411.5]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
