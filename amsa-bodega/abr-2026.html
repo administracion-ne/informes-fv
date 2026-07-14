@@ -1093,6 +1093,30 @@
                     <tr>
 
 
+                        <td class="month-col">Feb</td>
+
+
+                        <td>45953.9</td>
+
+
+                        <td>40030</td>
+
+
+                        <td>5923.9</td>
+
+
+                        <td>12.9%</td>
+
+
+                        <td>87.1%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
                         <td class="month-col">Mar</td>
 
 
@@ -1133,30 +1157,6 @@
 
 
                         <td>79.9%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">May</td>
-
-
-                        <td>50720.9</td>
-
-
-                        <td>41501</td>
-
-
-                        <td>9219.9</td>
-
-
-                        <td>18.2%</td>
-
-
-                        <td>81.8%</td>
 
 
                     </tr>
@@ -1209,15 +1209,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">161326.8</div>
+                <div class="metric-value-large">200880.8</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">32621.8</div>
+                <div class="metric-value-large">29325.8</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$5493942.1</div>
+                <div class="metric-value-large">$4749154.54</div>
             </div>
         </div>
 
@@ -1248,21 +1248,21 @@
 
 
         const data3m = {
-            labels: ["Mar", "Abr", "May"],
-            resto: [32432.0, 31385.0, 30372.0],
-            punta: [135.0, 130.0, 125.0],
-            valle: [11751.0, 11371.0, 11004.0],
-            generacion: [12584.7, 10817.2, 9219.9]
+            labels: ["Feb", "Mar", "Abr"],
+            resto: [29294.0, 32432.0, 31385.0],
+            punta: [122.0, 135.0, 130.0],
+            valle: [10614.0, 11751.0, 11371.0],
+            generacion: [5923.9, 12584.7, 10817.2]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["Mar", "Abr", "May"],
-            resto: [32432.0, 31385.0, 30372.0],
-            punta: [135.0, 130.0, 125.0],
-            valle: [11751.0, 11371.0, 11004.0],
-            generacion: [12584.7, 10817.2, 9219.9]
+            labels: ["Ene", "Feb", "Mar", "Abr"],
+            resto: [32433.0, 29294.0, 32432.0, 31385.0],
+            punta: [136.0, 122.0, 135.0, 130.0],
+            valle: [11752.0, 10614.0, 11751.0, 11371.0],
+            generacion: [0.0, 5923.9, 12584.7, 10817.2]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);

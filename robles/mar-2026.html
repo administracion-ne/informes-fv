@@ -961,10 +961,10 @@
         <!-- SECCION BENCHMARK -->
 
 
-        <div class="bench-card bench-warn">
+        <div class="bench-card bench-good">
 
 
-            📈 Tu consumo total subió un <strong>11.3%</strong> respecto al mes pasado.
+            🏆 Tu consumo total bajó un <strong>91.0%</strong> respecto al mes pasado. ¡Excelente!
 
 
         </div>
@@ -1093,6 +1093,30 @@
                     <tr>
 
 
+                        <td class="month-col">Feb</td>
+
+
+                        <td>66029.9</td>
+
+
+                        <td>53908</td>
+
+
+                        <td>12121.9</td>
+
+
+                        <td>18.4%</td>
+
+
+                        <td>81.6%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
                         <td class="month-col">Mar</td>
 
 
@@ -1138,30 +1162,6 @@
                     </tr>
 
 
-                    <tr>
-
-
-                        <td class="month-col">May</td>
-
-
-                        <td>2388.2</td>
-
-
-                        <td>2118</td>
-
-
-                        <td>270.2</td>
-
-
-                        <td>11.3%</td>
-
-
-                        <td>88.7%</td>
-
-
-                    </tr>
-
-
                 </tbody>
 
 
@@ -1180,7 +1180,7 @@
             <div class="factura-titulo">Última factura considerada</div>
 
 
-            <div class="factura-mes">mar 2026</div>
+            <div class="factura-mes">mar-2026</div>
 
 
         </div>
@@ -1201,7 +1201,7 @@
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro del mes en $</div>
-                <div class="metric-value-large">$1469818.09</div>
+                <div class="metric-value-large">$1469796.74</div>
             </div>
         </div>
 
@@ -1209,15 +1209,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">212196.1</div>
+                <div class="metric-value-large">209807.9</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">44562.1</div>
+                <div class="metric-value-large">44291.9</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$10764061.98</div>
+                <div class="metric-value-large">$10676142.2</div>
             </div>
         </div>
 
@@ -1248,21 +1248,21 @@
 
 
         const data3m = {
-            labels: ["Mar", "Abr", "May"],
-            resto: [7725.0, 1010.0, 1136.0],
-            punta: [5034.0, 456.0, 481.0],
-            valle: [5983.0, 484.0, 501.0],
-            generacion: [5205.4, 194.8, 270.2]
+            labels: ["Feb", "Mar", "Abr"],
+            resto: [24019.0, 7725.0, 1010.0],
+            punta: [13305.0, 5034.0, 456.0],
+            valle: [16584.0, 5983.0, 484.0],
+            generacion: [12121.9, 5205.4, 194.8]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May"],
-            resto: [677.0, 480.0, 271.0, 315.0, 276.0, 10710.0, 23102.0, 24019.0, 7725.0, 1010.0, 1136.0],
-            punta: [261.0, 231.0, 233.0, 233.0, 208.0, 7969.0, 16579.0, 13305.0, 5034.0, 456.0, 481.0],
-            valle: [209.0, 204.0, 225.0, 221.0, 207.0, 9368.0, 18937.0, 16584.0, 5983.0, 484.0, 501.0],
-            generacion: [391.8, 1708.6, 1492.0, 515.4, 632.2, 10816.3, 11213.5, 12121.9, 5205.4, 194.8, 270.2]
+            labels: ["Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr"],
+            resto: [677.0, 480.0, 271.0, 315.0, 276.0, 10710.0, 23102.0, 24019.0, 7725.0, 1010.0],
+            punta: [261.0, 231.0, 233.0, 233.0, 208.0, 7969.0, 16579.0, 13305.0, 5034.0, 456.0],
+            valle: [209.0, 204.0, 225.0, 221.0, 207.0, 9368.0, 18937.0, 16584.0, 5983.0, 484.0],
+            generacion: [391.8, 1708.6, 1492.0, 515.4, 632.2, 10816.3, 11213.5, 12121.9, 5205.4, 194.8]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);

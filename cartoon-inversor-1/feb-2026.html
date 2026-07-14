@@ -964,7 +964,7 @@
         <div class="bench-card bench-good">
 
 
-            🏆 Tu consumo total bajó un <strong>20.4%</strong> respecto al mes pasado. ¡Excelente!
+            🏆 Tu consumo total bajó un <strong>50.6%</strong> respecto al mes pasado. ¡Excelente!
 
 
         </div>
@@ -1001,11 +1001,11 @@
                     <div class="battery-title">☀ Generación Solar</div>
                     <div class="battery-solo-wrap">
                         <div class="battery-body-lg">
-                            <div class="battery-fill-lg" style="height:15.7%"></div>
-                            <span class="battery-pct-lg">15.7%</span>
+                            <div class="battery-fill-lg" style="height:32.6%"></div>
+                            <span class="battery-pct-lg">32.6%</span>
                         </div>
                         <div class="battery-solo-info">
-                            <div class="battery-solo-val">15.7%</div>
+                            <div class="battery-solo-val">32.6%</div>
                             <div class="battery-solo-sub">del consumo<br>cubierto por FV</div>
                         </div>
                     </div>
@@ -1093,70 +1093,70 @@
                     <tr>
 
 
+                        <td class="month-col">Ene</td>
+
+
+                        <td>21745.7</td>
+
+
+                        <td>16188</td>
+
+
+                        <td>5557.7</td>
+
+
+                        <td>25.6%</td>
+
+
+                        <td>74.4%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td class="month-col">Feb</td>
+
+
+                        <td>15331.4</td>
+
+
+                        <td>10332</td>
+
+
+                        <td>4999.4</td>
+
+
+                        <td>32.6%</td>
+
+
+                        <td>67.4%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
                         <td class="month-col">Mar</td>
 
 
-                        <td>14811.3</td>
+                        <td>7576.3</td>
 
 
-                        <td>11111</td>
+                        <td>3876</td>
 
 
                         <td>3700.3</td>
 
 
-                        <td>25%</td>
+                        <td>48.8%</td>
 
 
-                        <td>75%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">Abr</td>
-
-
-                        <td>5729.6</td>
-
-
-                        <td>2592</td>
-
-
-                        <td>3137.6</td>
-
-
-                        <td>54.8%</td>
-
-
-                        <td>45.2%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">May</td>
-
-
-                        <td>4562.8</td>
-
-
-                        <td>1896</td>
-
-
-                        <td>2666.8</td>
-
-
-                        <td>58.4%</td>
-
-
-                        <td>41.6%</td>
+                        <td>51.2%</td>
 
 
                     </tr>
@@ -1180,7 +1180,7 @@
             <div class="factura-titulo">Última factura considerada</div>
 
 
-            <div class="factura-mes">feb 2026</div>
+            <div class="factura-mes">feb-2026</div>
 
 
         </div>
@@ -1193,7 +1193,7 @@
         <div class="metrics-grid" id="metricsGrid3m">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo del mes [kWh]</div>
-                <div class="metric-value-large">31894.4</div>
+                <div class="metric-value-large">15331.4</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV del mes [kWh]</div>
@@ -1209,15 +1209,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">216019.6</div>
+                <div class="metric-value-large">126945.2</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">63009.6</div>
+                <div class="metric-value-large">57205.2</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$11042575.63</div>
+                <div class="metric-value-large">$10012632.4</div>
             </div>
         </div>
 
@@ -1248,21 +1248,21 @@
 
 
         const data3m = {
-            labels: ["Mar", "Abr", "May"],
-            resto: [7083.0, 2088.0, 1332.0],
-            punta: [2601.0, 264.0, 276.0],
-            valle: [1427.0, 240.0, 288.0],
-            generacion: [3700.3, 3137.6, 2666.8]
+            labels: ["Ene", "Feb", "Mar"],
+            resto: [13067.0, 4788.0, 2052.0],
+            punta: [1871.0, 3780.0, 1068.0],
+            valle: [1250.0, 1764.0, 756.0],
+            generacion: [5557.7, 4999.4, 3700.3]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May"],
-            resto: [14165.0, 5710.0, 4016.0, 7233.0, 1572.0, 4427.0, 11119.0, 26315.0, 15058.0, 7083.0, 2088.0, 1332.0],
-            punta: [4199.0, 648.0, 411.0, 445.0, 120.0, 77.0, 1173.0, 3647.0, 7746.0, 2601.0, 264.0, 276.0],
-            valle: [4543.0, 132.0, 112.0, 221.0, 180.0, 108.0, 215.0, 2617.0, 4091.0, 1427.0, 240.0, 288.0],
-            generacion: [5601.5, 5248.7, 4656.4, 4463.7, 3836.5, 4394.8, 5243.9, 5557.7, 4999.4, 3700.3, 3137.6, 2666.8]
+            labels: ["Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar"],
+            resto: [4207.0, 2247.0, 318.0, 1968.0, 2033.0, 2802.0, 6104.0, 1975.0, 3216.0, 13067.0, 4788.0, 2052.0],
+            punta: [1564.0, 88.0, 4199.0, 648.0, 411.0, 445.0, 120.0, 77.0, 852.0, 1871.0, 3780.0, 1068.0],
+            valle: [649.0, 101.0, 4543.0, 132.0, 112.0, 221.0, 180.0, 108.0, 324.0, 1250.0, 1764.0, 756.0],
+            generacion: [1638.5, 7863.8, 5601.5, 5248.7, 4656.4, 4463.7, 3836.5, 4394.8, 5243.9, 5557.7, 4999.4, 3700.3]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
