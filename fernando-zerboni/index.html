@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Informe FV - Hotel La Merced del Alto</title>
+    <title>Informe FV - Fernando Zerboni</title>
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -1053,7 +1053,7 @@
                 </div>
                 <div class="header-info">
                     <h1 id="headerTitle">INFORME FV — ÚLTIMOS 3 MESES</h1>
-                    <div class="nis">Hotel La Merced del Alto &nbsp;|&nbsp; NIS: 5076619 &nbsp;|&nbsp; </div>
+                    <div class="nis">Fernando Zerboni &nbsp;|&nbsp; NIS: 5227240 &nbsp;|&nbsp; </div>
                 </div>
                 <div class="period-toggle">
                     <button class="period-btn active" onclick="switchPeriod('3m')">3 Meses</button>
@@ -1075,7 +1075,7 @@
         <div class="bench-card bench-warn">
 
 
-            📈 Tu consumo total subió un <strong>1.5%</strong> respecto al mes pasado.
+            📈 Tu consumo total subió un <strong>83.4%</strong> respecto al mes pasado.
 
 
         </div>
@@ -1204,61 +1204,61 @@
                     <tr>
 
 
-                        <td class="month-col">Ene</td>
-
-
-                        <td>3363</td>
-
-
-                        <td>3363</td>
-
-
-                        <td>0</td>
-
-
-                        <td>0%</td>
-
-
-                        <td>100%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">Mar</td>
-
-
-                        <td>3115</td>
-
-
-                        <td>3115</td>
-
-
-                        <td>0</td>
-
-
-                        <td>0%</td>
-
-
-                        <td>100%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
                         <td class="month-col">Abr</td>
 
 
-                        <td>3163</td>
+                        <td>1014</td>
 
 
-                        <td>3163</td>
+                        <td>1014</td>
+
+
+                        <td>0</td>
+
+
+                        <td>0%</td>
+
+
+                        <td>100%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td class="month-col">May</td>
+
+
+                        <td>325</td>
+
+
+                        <td>325</td>
+
+
+                        <td>0</td>
+
+
+                        <td>0%</td>
+
+
+                        <td>100%</td>
+
+
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td class="month-col">Jun</td>
+
+
+                        <td>596</td>
+
+
+                        <td>596</td>
 
 
                         <td>0</td>
@@ -1291,7 +1291,7 @@
             <div class="factura-titulo">Última factura considerada</div>
 
 
-            <div class="factura-mes">abr 2026</div>
+            <div class="factura-mes">jun 2026</div>
 
 
         </div>
@@ -1304,7 +1304,7 @@
         <div class="metrics-grid" id="metricsGrid3m">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo del mes [kWh]</div>
-                <div class="metric-value-large">3163</div>
+                <div class="metric-value-large">596</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV del mes [kWh]</div>
@@ -1320,15 +1320,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">90387.7</div>
+                <div class="metric-value-large">1935</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">5819.7</div>
+                <div class="metric-value-large">0</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$734451.74</div>
+                <div class="metric-value-large">$0</div>
             </div>
         </div>
 
@@ -1354,7 +1354,7 @@
             </div>
             <div class="ficha-row">
                 <span class="ficha-label">🔧 Inversor (Principal)</span>
-                <span class="ficha-val">Growatt</span>
+                <span class="ficha-val">GoodWe</span>
             </div>
             
             <div class="ficha-row">
@@ -1412,21 +1412,21 @@
 
 
         const data3m = {
-            labels: ["Ene", "Mar", "Abr"],
-            resto: [1493.0, 1312.0, 1372.0],
-            punta: [1105.0, 1037.0, 1069.0],
-            valle: [765.0, 766.0, 722.0],
+            labels: ["Abr", "May", "Jun"],
+            resto: [1014.0, 325.0, 596.0],
+            punta: [0.0, 0.0, 0.0],
+            valle: [0.0, 0.0, 0.0],
             generacion: [0.0, 0.0, 0.0]
         };
         data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
         data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
         
         const data12m = {
-            labels: ["Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Mar", "Abr"],
-            resto: [2085.0, 1769.0, 1479.0, 1560.0, 3990.0, 1367.0, 1422.0, 1614.0, 1259.0, 1493.0, 1312.0, 1372.0],
-            punta: [1268.0, 1231.0, 1054.0, 1343.0, 2490.0, 1095.0, 1196.0, 1129.0, 1096.0, 1105.0, 1037.0, 1069.0],
-            valle: [926.0, 853.0, 811.0, 844.0, 1440.0, 707.0, 807.0, 951.0, 841.0, 765.0, 766.0, 722.0],
-            generacion: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+            labels: ["Abr", "May", "Jun"],
+            resto: [1014.0, 325.0, 596.0],
+            punta: [0.0, 0.0, 0.0],
+            valle: [0.0, 0.0, 0.0],
+            generacion: [0.0, 0.0, 0.0]
         };
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
