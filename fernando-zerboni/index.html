@@ -1072,10 +1072,10 @@
         <!-- SECCION BENCHMARK -->
 
 
-        <div class="bench-card bench-warn">
+        <div class="bench-card bench-neutral">
 
 
-            📈 Tu consumo total subió un <strong>100.7%</strong> respecto al mes pasado.
+            Midiendo tendencia de consumo...
 
 
         </div>
@@ -1112,11 +1112,11 @@
                     <div class="battery-title">☀ Generación Solar</div>
                     <div class="battery-solo-wrap">
                         <div class="battery-body-lg">
-                            <div class="battery-fill-lg" style="height:21.3%"></div>
-                            <span class="battery-pct-lg">21.3%</span>
+                            <div class="battery-fill-lg" style="height:14.4%"></div>
+                            <span class="battery-pct-lg">14.4%</span>
                         </div>
                         <div class="battery-solo-info">
-                            <div class="battery-solo-val">21.3%</div>
+                            <div class="battery-solo-val">14.4%</div>
                             <div class="battery-solo-sub">del consumo<br>cubierto por FV</div>
                         </div>
                     </div>
@@ -1124,7 +1124,7 @@
 
                 <div class="eco-box">
                     <div class="eco-co2">
-                        <div class="eco-co2-val">72</div>
+                        <div class="eco-co2-val">82</div>
                         <div class="eco-co2-unit">kg CO₂e evitados</div>
                     </div>
                     <div class="eco-divider"></div>
@@ -1204,70 +1204,22 @@
                     <tr>
 
 
-                        <td class="month-col">Abr</td>
+                        <td class="month-col">Jul</td>
 
 
-                        <td>1293.4</td>
+                        <td>1270.5</td>
 
 
-                        <td>1014</td>
+                        <td>1088</td>
 
 
-                        <td>279.4</td>
+                        <td>182.5</td>
 
 
-                        <td>21.6%</td>
+                        <td>14.4%</td>
 
 
-                        <td>78.4%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">May</td>
-
-
-                        <td>377.3</td>
-
-
-                        <td>325</td>
-
-
-                        <td>52.3</td>
-
-
-                        <td>13.9%</td>
-
-
-                        <td>86.1%</td>
-
-
-                    </tr>
-
-
-                    <tr>
-
-
-                        <td class="month-col">Jun</td>
-
-
-                        <td>757.4</td>
-
-
-                        <td>596</td>
-
-
-                        <td>161.4</td>
-
-
-                        <td>21.3%</td>
-
-
-                        <td>78.7%</td>
+                        <td>85.6%</td>
 
 
                     </tr>
@@ -1291,7 +1243,7 @@
             <div class="factura-titulo">Última factura considerada</div>
 
 
-            <div class="factura-mes">jun 2026</div>
+            <div class="factura-mes">jul-2026</div>
 
 
         </div>
@@ -1304,15 +1256,15 @@
         <div class="metrics-grid" id="metricsGrid3m">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo del mes [kWh]</div>
-                <div class="metric-value-large">757.4</div>
+                <div class="metric-value-large">1270.5</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV del mes [kWh]</div>
-                <div class="metric-value-large">161.4</div>
+                <div class="metric-value-large">182.5</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro del mes en $</div>
-                <div class="metric-value-large">$45290.16</div>
+                <div class="metric-value-large">$51645.86</div>
             </div>
         </div>
 
@@ -1320,15 +1272,15 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">2428.1</div>
+                <div class="metric-value-large">1270.5</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
-                <div class="metric-value-large">493.1</div>
+                <div class="metric-value-large">182.5</div>
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$130809.71</div>
+                <div class="metric-value-large">$51645.86</div>
             </div>
         </div>
 
@@ -1365,27 +1317,39 @@
 
 
         const data3m = {
-            labels: ["Abr", "May", "Jun"],
-            resto: [1014.0, 325.0, 596.0],
-            punta: [0.0, 0.0, 0.0],
-            valle: [0.0, 0.0, 0.0],
-            generacion: [279.4, 52.3, 161.4]
+            labels: ["Jul"],
+            resto: [1088.0],
+            punta: [0.0],
+            valle: [0.0],
+            generacion: [182.5],
+            consumo: [1088.0]
         };
-        data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
-        data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
+        data3m.red_total = data3m.labels.map((_, i) => {
+            let sumFranjas = (data3m.resto[i] || 0) + (data3m.punta[i] || 0) + (data3m.valle[i] || 0);
+            return sumFranjas > 0 ? sumFranjas : (data3m.consumo[i] || 0);
+        });
+        data3m.resto_total = data3m.labels.map((_, i) => {
+            return (data3m.resto[i] && data3m.resto[i] > 0) ? (data3m.resto[i] + (data3m.generacion[i] || 0)) : 0;
+        });
         
         const data12m = {
-            labels: ["Abr", "May", "Jun"],
-            resto: [1014.0, 325.0, 596.0],
-            punta: [0.0, 0.0, 0.0],
-            valle: [0.0, 0.0, 0.0],
-            generacion: [279.4, 52.3, 161.4]
+            labels: ["Jul"],
+            resto: [1088.0],
+            punta: [0.0],
+            valle: [0.0],
+            generacion: [182.5],
+            consumo: [1088.0]
         };
-        data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
-        data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
+        data12m.red_total = data12m.labels.map((_, i) => {
+            let sumFranjas = (data12m.resto[i] || 0) + (data12m.punta[i] || 0) + (data12m.valle[i] || 0);
+            return sumFranjas > 0 ? sumFranjas : (data12m.consumo[i] || 0);
+        });
+        data12m.resto_total = data12m.labels.map((_, i) => {
+            return (data12m.resto[i] && data12m.resto[i] > 0) ? (data12m.resto[i] + (data12m.generacion[i] || 0)) : 0;
+        });
         
-        const invDatasets3m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [279.4, 52.3, 161.4], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
-        const invDatasets12m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [279.4, 52.3, 161.4], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets3m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [182.5], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets12m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [182.5], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
 
         function buildDatasets(periodData, invDs) {
             return [
@@ -1686,7 +1650,7 @@
                     
 
 
-                    const text = '72'.replace(/,/g, '.');
+                    const text = '82'.replace(/,/g, '.');
 
 
                     ctx.fillText(text, width / 2, height / 2 - 5);
@@ -1726,3 +1690,5 @@
 
 
 </html>
+
+
