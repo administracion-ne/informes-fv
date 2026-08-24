@@ -1346,11 +1346,11 @@
                     <span style="font-size: 11px; font-family: monospace; color: #64748b;">SN: FFQ6F4B00M</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #22c55e;">1800.8 kWh</span>
-                    <span style="font-size: 13px; font-weight: 600; color: #475569;">73.0% del total</span>
+                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #22c55e;">1799.8 kWh</span>
+                    <span style="font-size: 13px; font-weight: 600; color: #475569;">72.9% del total</span>
                 </div>
                 <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
-                    <div style="width: 73.0%; height: 100%; background-color: #22c55e; border-radius: 4px;"></div>
+                    <div style="width: 72.9%; height: 100%; background-color: #22c55e; border-radius: 4px;"></div>
                 </div>
             </div>
             
@@ -1360,11 +1360,11 @@
                     <span style="font-size: 11px; font-family: monospace; color: #64748b;">SN: QUNAEZX00K</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #0284c7;">667.2 kWh</span>
-                    <span style="font-size: 13px; font-weight: 600; color: #475569;">27.0% del total</span>
+                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #0284c7;">668.2 kWh</span>
+                    <span style="font-size: 13px; font-weight: 600; color: #475569;">27.1% del total</span>
                 </div>
                 <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
-                    <div style="width: 27.0%; height: 100%; background-color: #0284c7; border-radius: 4px;"></div>
+                    <div style="width: 27.1%; height: 100%; background-color: #0284c7; border-radius: 4px;"></div>
                 </div>
             </div>
             
@@ -1421,8 +1421,8 @@
         data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
         data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
         
-        const invDatasets3m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3388.1, 2629.0, 1800.8], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1255.3, 974.1, 667.2], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
-        const invDatasets12m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3357.7, 3494.2, 3734.8, 2461.6, 6415.6, 7017.2, 8111.5, 6570.8, 3388.1, 2629.0, 1800.8], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1244.1, 1294.7, 1383.8, 912.0, 2377.1, 2600.0, 3005.4, 2434.5, 1255.3, 974.1, 667.2], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets3m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3386.3, 2627.6, 1799.8], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1257.1, 975.5, 668.2], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets12m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3355.9, 3492.4, 3732.8, 2460.2, 6412.2, 7013.5, 8107.1, 6567.2, 3386.3, 2627.6, 1799.8], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1245.9, 1296.5, 1385.8, 913.4, 2380.5, 2603.7, 3009.8, 2438.1, 1257.1, 975.5, 668.2], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
 
         function buildDatasets(periodData, invDs) {
             return [
