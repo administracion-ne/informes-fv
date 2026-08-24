@@ -1346,7 +1346,7 @@
                     <span style="font-size: 11px; font-family: monospace; color: #64748b;">SN: FFQ6F4B00M</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #22c55e;">1799.8 kWh</span>
+                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #22c55e;">1799.5 kWh</span>
                     <span style="font-size: 13px; font-weight: 600; color: #475569;">72.9% del total</span>
                 </div>
                 <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
@@ -1360,7 +1360,7 @@
                     <span style="font-size: 11px; font-family: monospace; color: #64748b;">SN: QUNAEZX00K</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #0284c7;">668.2 kWh</span>
+                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #0284c7;">668.5 kWh</span>
                     <span style="font-size: 13px; font-weight: 600; color: #475569;">27.1% del total</span>
                 </div>
                 <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
@@ -1406,23 +1406,35 @@
             resto: [0.0, 0.0, 0.0],
             punta: [0.0, 0.0, 0.0],
             valle: [0.0, 0.0, 0.0],
-            generacion: [4643.4, 3603.1, 2468.0]
+            generacion: [4643.4, 3603.1, 2468.0],
+            consumo: [9694.0, 6678.0, 5847.0]
         };
-        data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
-        data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
+        data3m.red_total = data3m.labels.map((_, i) => {
+            let sumFranjas = (data3m.resto[i] || 0) + (data3m.punta[i] || 0) + (data3m.valle[i] || 0);
+            return sumFranjas > 0 ? sumFranjas : (data3m.consumo[i] || 0);
+        });
+        data3m.resto_total = data3m.labels.map((_, i) => {
+            return (data3m.resto[i] && data3m.resto[i] > 0) ? (data3m.resto[i] + (data3m.generacion[i] || 0)) : 0;
+        });
         
         const data12m = {
             labels: ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
             resto: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             punta: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             valle: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            generacion: [4601.8, 4788.9, 5118.6, 3373.6, 8792.7, 9617.2, 11116.9, 9005.3, 4643.4, 3603.1, 2468.0]
+            generacion: [4601.8, 4788.9, 5118.6, 3373.6, 8792.7, 9617.2, 11116.9, 9005.3, 4643.4, 3603.1, 2468.0],
+            consumo: [41766.0, 61690.0, 49219.0, 33314.0, 33662.0, 26207.0, 49750.0, 50400.0, 9694.0, 6678.0, 5847.0]
         };
-        data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
-        data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
+        data12m.red_total = data12m.labels.map((_, i) => {
+            let sumFranjas = (data12m.resto[i] || 0) + (data12m.punta[i] || 0) + (data12m.valle[i] || 0);
+            return sumFranjas > 0 ? sumFranjas : (data12m.consumo[i] || 0);
+        });
+        data12m.resto_total = data12m.labels.map((_, i) => {
+            return (data12m.resto[i] && data12m.resto[i] > 0) ? (data12m.resto[i] + (data12m.generacion[i] || 0)) : 0;
+        });
         
-        const invDatasets3m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3386.3, 2627.6, 1799.8], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1257.1, 975.5, 668.2], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
-        const invDatasets12m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3355.9, 3492.4, 3732.8, 2460.2, 6412.2, 7013.5, 8107.1, 6567.2, 3386.3, 2627.6, 1799.8], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1245.9, 1296.5, 1385.8, 913.4, 2380.5, 2603.7, 3009.8, 2438.1, 1257.1, 975.5, 668.2], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets3m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3385.6, 2627.1, 1799.5], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1257.8, 976.0, 668.5], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets12m = [{"label": "Generaci\u00f3n Inversor 1 (FFQ6F4B00M)", "data": [3355.3, 3491.7, 3732.1, 2459.8, 6411.0, 7012.2, 8105.6, 6566.0, 3385.6, 2627.1, 1799.5], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (QUNAEZX00K)", "data": [1246.5, 1297.2, 1386.5, 913.8, 2381.7, 2605.0, 3011.3, 2439.3, 1257.8, 976.0, 668.5], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
 
         function buildDatasets(periodData, invDs) {
             return [

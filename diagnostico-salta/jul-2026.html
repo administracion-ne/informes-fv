@@ -1369,20 +1369,32 @@
             resto: [0.0, 0.0, 0.0],
             punta: [0.0, 0.0, 0.0],
             valle: [0.0, 0.0, 0.0],
-            generacion: [2189.9, 1816.6, 2227.9]
+            generacion: [2189.9, 1816.6, 2227.9],
+            consumo: [15820.0, 15400.0, 16170.0]
         };
-        data3m.red_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.punta[i] + data3m.valle[i]);
-        data3m.resto_total = data3m.labels.map((_, i) => data3m.resto[i] + data3m.generacion[i]);
+        data3m.red_total = data3m.labels.map((_, i) => {
+            let sumFranjas = (data3m.resto[i] || 0) + (data3m.punta[i] || 0) + (data3m.valle[i] || 0);
+            return sumFranjas > 0 ? sumFranjas : (data3m.consumo[i] || 0);
+        });
+        data3m.resto_total = data3m.labels.map((_, i) => {
+            return (data3m.resto[i] && data3m.resto[i] > 0) ? (data3m.resto[i] + (data3m.generacion[i] || 0)) : 0;
+        });
         
         const data12m = {
             labels: ["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
             resto: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             punta: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             valle: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            generacion: [2805.5, 3433.2, 3585.9, 3980.5, 4092.3, 3551.4, 3335.7, 3028.1, 2607.5, 2189.9, 1816.6, 2227.9]
+            generacion: [2805.5, 3433.2, 3585.9, 3980.5, 4092.3, 3551.4, 3335.7, 3028.1, 2607.5, 2189.9, 1816.6, 2227.9],
+            consumo: [15330.0, 15120.0, 16520.0, 15680.0, 16520.0, 17710.0, 15540.0, 16870.0, 16450.0, 15820.0, 15400.0, 16170.0]
         };
-        data12m.red_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.punta[i] + data12m.valle[i]);
-        data12m.resto_total = data12m.labels.map((_, i) => data12m.resto[i] + data12m.generacion[i]);
+        data12m.red_total = data12m.labels.map((_, i) => {
+            let sumFranjas = (data12m.resto[i] || 0) + (data12m.punta[i] || 0) + (data12m.valle[i] || 0);
+            return sumFranjas > 0 ? sumFranjas : (data12m.consumo[i] || 0);
+        });
+        data12m.resto_total = data12m.labels.map((_, i) => {
+            return (data12m.resto[i] && data12m.resto[i] > 0) ? (data12m.resto[i] + (data12m.generacion[i] || 0)) : 0;
+        });
         
         const invDatasets3m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [2189.9, 1816.6, 2227.9], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
         const invDatasets12m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [2805.5, 3433.2, 3585.9, 3980.5, 4092.3, 3551.4, 3335.7, 3028.1, 2607.5, 2189.9, 1816.6, 2227.9], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
