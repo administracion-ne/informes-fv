@@ -1328,7 +1328,7 @@
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$9234570.09</div>
+                <div class="metric-value-large">$7943454.8</div>
             </div>
         </div>
 
@@ -1366,9 +1366,9 @@
 
         const data3m = {
             labels: ["May", "Jun", "Jul"],
-            resto: [0.0, 0.0, 0.0],
-            punta: [0.0, 0.0, 0.0],
-            valle: [0.0, 0.0, 0.0],
+            resto: [2515.0, 2363.0, 1562.0],
+            punta: [35.0, 146.0, 3.0],
+            valle: [2.0, 172.0, 2.0],
             generacion: [4381.0, 3701.2, 3608.5],
             consumo: [2552.0, 2681.0, 1567.0]
         };
@@ -1377,14 +1377,15 @@
             return sumFranjas > 0 ? sumFranjas : (data3m.consumo[i] || 0);
         });
         data3m.resto_total = data3m.labels.map((_, i) => {
-            return (data3m.resto[i] && data3m.resto[i] > 0) ? (data3m.resto[i] + (data3m.generacion[i] || 0)) : 0;
+            let r = (data3m.resto[i] && data3m.resto[i] > 0) ? data3m.resto[i] : (data3m.punta[i] === 0 && data3m.valle[i] === 0 ? (data3m.consumo[i] || 0) : 0);
+            return (r > 0 || (data3m.generacion[i] || 0) > 0) ? (r + (data3m.generacion[i] || 0)) : 0;
         });
         
         const data12m = {
             labels: ["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
-            resto: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            punta: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            valle: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            resto: [1579.0, 4668.0, 3716.0, 4108.0, 4822.0, 2487.0, 1027.0, 2688.0, 2160.0, 2515.0, 2363.0, 1562.0],
+            punta: [1040.0, 1726.0, 1034.0, 766.0, 1180.0, 756.0, 247.0, 694.0, 16.0, 35.0, 146.0, 3.0],
+            valle: [342.0, 2.0, 31.0, 2.0, 343.0, 95.0, 2.0, 29.0, 2.0, 2.0, 172.0, 2.0],
             generacion: [4748.5, 4974.6, 5813.3, 5400.1, 5109.8, 3133.3, 1800.3, 4220.6, 4523.2, 4381.0, 3701.2, 3608.5],
             consumo: [7525.0, 6396.0, 4781.0, 4876.0, 6345.0, 3338.0, 1276.0, 3411.0, 2178.0, 2552.0, 2681.0, 1567.0]
         };
@@ -1393,7 +1394,8 @@
             return sumFranjas > 0 ? sumFranjas : (data12m.consumo[i] || 0);
         });
         data12m.resto_total = data12m.labels.map((_, i) => {
-            return (data12m.resto[i] && data12m.resto[i] > 0) ? (data12m.resto[i] + (data12m.generacion[i] || 0)) : 0;
+            let r = (data12m.resto[i] && data12m.resto[i] > 0) ? data12m.resto[i] : (data12m.punta[i] === 0 && data12m.valle[i] === 0 ? (data12m.consumo[i] || 0) : 0);
+            return (r > 0 || (data12m.generacion[i] || 0) > 0) ? (r + (data12m.generacion[i] || 0)) : 0;
         });
         
         const invDatasets3m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [4381.0, 3701.2, 3608.5], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
@@ -1485,20 +1487,31 @@
                             label: function(context) {
                                 let label = context.dataset.label || '';
                                 let value = context.parsed.y;
-                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh';
+                                if (value === 0) return null;
+                                let totalConsumo = 0;
+                                const chart = context.chart;
+                                chart.data.datasets.forEach(function(ds) {
+                                    if (ds.stack === 'Origen') {
+                                        totalConsumo += (ds.data[context.dataIndex] || 0);
+                                    }
+                                });
+                                let pctStr = '';
+                                if (totalConsumo > 0 && (context.dataset.stack === 'Franja' || context.dataset.stack === 'Origen')) {
+                                    let pct = ((value / totalConsumo) * 100).toFixed(1);
+                                    pctStr = ' (' + pct + '%)';
+                                }
+                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh' + pctStr;
                             },
                             footer: function(tooltipItems) {
-                                // Solo calcular total si hovered stack es Origen
-                                const stack = tooltipItems[0]?.dataset?.stack;
-                                if (stack !== 'Origen') return '';
+                                // Solo calcular total si hovered stack es Origen o Franja
                                 let total = 0;
                                 const chart = tooltipItems[0].chart;
                                 chart.data.datasets.forEach(function(ds) {
                                     if (ds.stack === 'Origen') {
-                                        total += ds.data[tooltipItems[0].dataIndex];
+                                        total += (ds.data[tooltipItems[0].dataIndex] || 0);
                                     }
                                 });
-                                return 'Total consumo: ' + total.toLocaleString('es-AR') + ' kWh';
+                                return total > 0 ? ('Total consumo: ' + total.toLocaleString('es-AR') + ' kWh') : '';
                             }
                         }
                     }

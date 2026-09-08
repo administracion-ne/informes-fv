@@ -1320,7 +1320,7 @@
         <div class="metrics-grid" id="metricsGrid12m" style="display:none">
             <div class="metric-card-large consumo">
                 <div class="metric-label-large">Consumo acumulado [kWh]</div>
-                <div class="metric-value-large">37446.4</div>
+                <div class="metric-value-large">40710.4</div>
             </div>
             <div class="metric-card-large generacion">
                 <div class="metric-label-large">Generación FV acumulada [kWh]</div>
@@ -1328,7 +1328,7 @@
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$1493723.94</div>
+                <div class="metric-value-large">$1189727.04</div>
             </div>
         </div>
 
@@ -1366,7 +1366,7 @@
 
         const data3m = {
             labels: ["May", "Jun", "Jul"],
-            resto: [0.0, 0.0, 0.0],
+            resto: [1861.0, 1764.0, 2041.0],
             punta: [0.0, 0.0, 0.0],
             valle: [0.0, 0.0, 0.0],
             generacion: [763.7, 644.6, 18.1],
@@ -1377,23 +1377,25 @@
             return sumFranjas > 0 ? sumFranjas : (data3m.consumo[i] || 0);
         });
         data3m.resto_total = data3m.labels.map((_, i) => {
-            return (data3m.resto[i] && data3m.resto[i] > 0) ? (data3m.resto[i] + (data3m.generacion[i] || 0)) : 0;
+            let r = (data3m.resto[i] && data3m.resto[i] > 0) ? data3m.resto[i] : (data3m.punta[i] === 0 && data3m.valle[i] === 0 ? (data3m.consumo[i] || 0) : 0);
+            return (r > 0 || (data3m.generacion[i] || 0) > 0) ? (r + (data3m.generacion[i] || 0)) : 0;
         });
         
         const data12m = {
             labels: ["Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
-            resto: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            resto: [2726.0, 5990.0, 4054.0, 4539.0, 3585.0, 2608.0, 2360.0, 2047.0, 1861.0, 1764.0, 2041.0],
             punta: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             valle: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             generacion: [0.0, 106.2, 1105.9, 1113.6, 911.1, 1032.2, 819.7, 620.3, 763.7, 644.6, 18.1],
-            consumo: [2726.0, 2726.0, 4054.0, 4539.0, 3585.0, 2608.0, 2360.0, 2047.0, 1861.0, 1764.0, 2041.0]
+            consumo: [2726.0, 5990.0, 4054.0, 4539.0, 3585.0, 2608.0, 2360.0, 2047.0, 1861.0, 1764.0, 2041.0]
         };
         data12m.red_total = data12m.labels.map((_, i) => {
             let sumFranjas = (data12m.resto[i] || 0) + (data12m.punta[i] || 0) + (data12m.valle[i] || 0);
             return sumFranjas > 0 ? sumFranjas : (data12m.consumo[i] || 0);
         });
         data12m.resto_total = data12m.labels.map((_, i) => {
-            return (data12m.resto[i] && data12m.resto[i] > 0) ? (data12m.resto[i] + (data12m.generacion[i] || 0)) : 0;
+            let r = (data12m.resto[i] && data12m.resto[i] > 0) ? data12m.resto[i] : (data12m.punta[i] === 0 && data12m.valle[i] === 0 ? (data12m.consumo[i] || 0) : 0);
+            return (r > 0 || (data12m.generacion[i] || 0) > 0) ? (r + (data12m.generacion[i] || 0)) : 0;
         });
         
         const invDatasets3m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [763.7, 644.6, 18.1], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
@@ -1485,20 +1487,31 @@
                             label: function(context) {
                                 let label = context.dataset.label || '';
                                 let value = context.parsed.y;
-                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh';
+                                if (value === 0) return null;
+                                let totalConsumo = 0;
+                                const chart = context.chart;
+                                chart.data.datasets.forEach(function(ds) {
+                                    if (ds.stack === 'Origen') {
+                                        totalConsumo += (ds.data[context.dataIndex] || 0);
+                                    }
+                                });
+                                let pctStr = '';
+                                if (totalConsumo > 0 && (context.dataset.stack === 'Franja' || context.dataset.stack === 'Origen')) {
+                                    let pct = ((value / totalConsumo) * 100).toFixed(1);
+                                    pctStr = ' (' + pct + '%)';
+                                }
+                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh' + pctStr;
                             },
                             footer: function(tooltipItems) {
-                                // Solo calcular total si hovered stack es Origen
-                                const stack = tooltipItems[0]?.dataset?.stack;
-                                if (stack !== 'Origen') return '';
+                                // Solo calcular total si hovered stack es Origen o Franja
                                 let total = 0;
                                 const chart = tooltipItems[0].chart;
                                 chart.data.datasets.forEach(function(ds) {
                                     if (ds.stack === 'Origen') {
-                                        total += ds.data[tooltipItems[0].dataIndex];
+                                        total += (ds.data[tooltipItems[0].dataIndex] || 0);
                                     }
                                 });
-                                return 'Total consumo: ' + total.toLocaleString('es-AR') + ' kWh';
+                                return total > 0 ? ('Total consumo: ' + total.toLocaleString('es-AR') + ' kWh') : '';
                             }
                         }
                     }

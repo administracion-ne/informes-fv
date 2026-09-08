@@ -1328,48 +1328,11 @@
             </div>
             <div class="metric-card-large ahorro">
                 <div class="metric-label-large">Ahorro acumulado en $</div>
-                <div class="metric-value-large">$12438683.61</div>
+                <div class="metric-value-large">$11850296.3</div>
             </div>
         </div>
 
         <!-- ============ DESGLOSE DE INVERSORES ============ -->
-        
-        <div style="background: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 18px 24px; margin-bottom: 18px;">
-            <div style="font-family: 'Oswald', sans-serif; font-size: 16px; font-weight: 700; text-transform: uppercase; color: #333333; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
-                <span>⚡ Producción por Inversor (Mes Actual)</span>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 14px;">
-                
-            <div style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 13px; font-weight: 700; color: #1e293b;">🔵 Inversor 1: GEGUE9M00G</span>
-                    <span style="font-size: 11px; font-family: monospace; color: #64748b;">SN: GEGUE9M00G</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #22c55e;">0 kWh</span>
-                    <span style="font-size: 13px; font-weight: 600; color: #475569;">0.0% del total</span>
-                </div>
-                <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
-                    <div style="width: 0.0%; height: 100%; background-color: #22c55e; border-radius: 4px;"></div>
-                </div>
-            </div>
-            
-            <div style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 13px; font-weight: 700; color: #1e293b;">🟢 Inversor 2: FFQ0E7T00M</span>
-                    <span style="font-size: 11px; font-family: monospace; color: #64748b;">SN: FFQ0E7T00M</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
-                    <span style="font-size: 20px; font-weight: 700; font-family: 'Oswald', sans-serif; color: #0284c7;">3865.1 kWh</span>
-                    <span style="font-size: 13px; font-weight: 600; color: #475569;">100.0% del total</span>
-                </div>
-                <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
-                    <div style="width: 100.0%; height: 100%; background-color: #0284c7; border-radius: 4px;"></div>
-                </div>
-            </div>
-            
-            </div>
-        </div>
         
 
         <!-- ============ FICHA DE INSTALACIÓN ============ -->
@@ -1403,9 +1366,9 @@
 
         const data3m = {
             labels: ["May", "Jun", "Jul"],
-            resto: [0.0, 0.0, 0.0],
-            punta: [0.0, 0.0, 0.0],
-            valle: [0.0, 0.0, 0.0],
+            resto: [1332.0, 2964.0, 3384.0],
+            punta: [276.0, 228.0, 264.0],
+            valle: [288.0, 216.0, 252.0],
             generacion: [2666.8, 3007.6, 3865.1],
             consumo: [1896.0, 3408.0, 3900.0]
         };
@@ -1414,14 +1377,15 @@
             return sumFranjas > 0 ? sumFranjas : (data3m.consumo[i] || 0);
         });
         data3m.resto_total = data3m.labels.map((_, i) => {
-            return (data3m.resto[i] && data3m.resto[i] > 0) ? (data3m.resto[i] + (data3m.generacion[i] || 0)) : 0;
+            let r = (data3m.resto[i] && data3m.resto[i] > 0) ? data3m.resto[i] : (data3m.punta[i] === 0 && data3m.valle[i] === 0 ? (data3m.consumo[i] || 0) : 0);
+            return (r > 0 || (data3m.generacion[i] || 0) > 0) ? (r + (data3m.generacion[i] || 0)) : 0;
         });
         
         const data12m = {
             labels: ["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"],
-            resto: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            punta: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-            valle: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            resto: [2556.0, 3468.0, 6104.0, 1975.0, 4392.0, 16188.0, 10332.0, 3876.0, 2592.0, 1332.0, 2964.0, 3384.0],
+            punta: [411.0, 445.0, 120.0, 77.0, 852.0, 1871.0, 3780.0, 1068.0, 0.0, 276.0, 228.0, 264.0],
+            valle: [112.0, 221.0, 180.0, 108.0, 324.0, 1250.0, 1764.0, 756.0, 0.0, 288.0, 216.0, 252.0],
             generacion: [4656.4, 4463.7, 3836.5, 4394.8, 5243.9, 5557.7, 4999.4, 3700.3, 3137.6, 2666.8, 3007.6, 3865.1],
             consumo: [2556.0, 3468.0, 6104.0, 2160.0, 4392.0, 16188.0, 10332.0, 3876.0, 2592.0, 1896.0, 3408.0, 3900.0]
         };
@@ -1430,11 +1394,12 @@
             return sumFranjas > 0 ? sumFranjas : (data12m.consumo[i] || 0);
         });
         data12m.resto_total = data12m.labels.map((_, i) => {
-            return (data12m.resto[i] && data12m.resto[i] > 0) ? (data12m.resto[i] + (data12m.generacion[i] || 0)) : 0;
+            let r = (data12m.resto[i] && data12m.resto[i] > 0) ? data12m.resto[i] : (data12m.punta[i] === 0 && data12m.valle[i] === 0 ? (data12m.consumo[i] || 0) : 0);
+            return (r > 0 || (data12m.generacion[i] || 0) > 0) ? (r + (data12m.generacion[i] || 0)) : 0;
         });
         
-        const invDatasets3m = [{"label": "Generaci\u00f3n Inversor 1 (GEGUE9M00G)", "data": [0.0, 0.0, 0.0], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (FFQ0E7T00M)", "data": [2666.8, 3007.6, 3865.1], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
-        const invDatasets12m = [{"label": "Generaci\u00f3n Inversor 1 (GEGUE9M00G)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#22c55e", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}, {"label": "Generaci\u00f3n Inversor 2 (FFQ0E7T00M)", "data": [4656.4, 4463.7, 3836.5, 4394.8, 5243.9, 5557.7, 4999.4, 3700.3, 3137.6, 2666.8, 3007.6, 3865.1], "backgroundColor": "#0284c7", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets3m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [2666.8, 3007.6, 3865.1], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
+        const invDatasets12m = [{"label": "Generaci\u00f3n FV (Autoconsumida)", "data": [4656.4, 4463.7, 3836.5, 4394.8, 5243.9, 5557.7, 4999.4, 3700.3, 3137.6, 2666.8, 3007.6, 3865.1], "backgroundColor": "#66BB6A", "stack": "Origen", "categoryPercentage": 0.8, "barPercentage": 0.9, "borderWidth": 0, "borderRadius": 0}];
 
         function buildDatasets(periodData, invDs) {
             return [
@@ -1522,20 +1487,31 @@
                             label: function(context) {
                                 let label = context.dataset.label || '';
                                 let value = context.parsed.y;
-                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh';
+                                if (value === 0) return null;
+                                let totalConsumo = 0;
+                                const chart = context.chart;
+                                chart.data.datasets.forEach(function(ds) {
+                                    if (ds.stack === 'Origen') {
+                                        totalConsumo += (ds.data[context.dataIndex] || 0);
+                                    }
+                                });
+                                let pctStr = '';
+                                if (totalConsumo > 0 && (context.dataset.stack === 'Franja' || context.dataset.stack === 'Origen')) {
+                                    let pct = ((value / totalConsumo) * 100).toFixed(1);
+                                    pctStr = ' (' + pct + '%)';
+                                }
+                                return label + ': ' + value.toLocaleString('es-AR') + ' kWh' + pctStr;
                             },
                             footer: function(tooltipItems) {
-                                // Solo calcular total si hovered stack es Origen
-                                const stack = tooltipItems[0]?.dataset?.stack;
-                                if (stack !== 'Origen') return '';
+                                // Solo calcular total si hovered stack es Origen o Franja
                                 let total = 0;
                                 const chart = tooltipItems[0].chart;
                                 chart.data.datasets.forEach(function(ds) {
                                     if (ds.stack === 'Origen') {
-                                        total += ds.data[tooltipItems[0].dataIndex];
+                                        total += (ds.data[tooltipItems[0].dataIndex] || 0);
                                     }
                                 });
-                                return 'Total consumo: ' + total.toLocaleString('es-AR') + ' kWh';
+                                return total > 0 ? ('Total consumo: ' + total.toLocaleString('es-AR') + ' kWh') : '';
                             }
                         }
                     }
